@@ -1,15 +1,15 @@
 package com.teaching.evaluation;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends Activity implements View.OnClickListener {
 
     EditText mEditTextName;//输入的名称
     EditText mEditTextPwd;//输入的密码
@@ -31,12 +31,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //初始化控件，绑定点击事件
     public void initView(){
-        mEditTextName = findViewById(R.id.name);
-        mEditTextPwd  = findViewById(R.id.pwd);
-        mCheckBoxRemindPwd = findViewById(R.id.remind_pwd);
-        mTextForgetPwd = findViewById(R.id.forget_pwd);
-        mButtonLogin = findViewById(R.id.login);
-        mButtonRegister = findViewById(R.id.register);
+        mEditTextName = (EditText)findViewById(R.id.name);
+        mEditTextPwd  = (EditText)findViewById(R.id.pwd);
+        mCheckBoxRemindPwd = (CheckBox) findViewById(R.id.remind_pwd);
+        mTextForgetPwd = (TextView) findViewById(R.id.forget_pwd);
+        mButtonLogin = (Button) findViewById(R.id.login);
+        mButtonRegister = (Button) findViewById(R.id.register);
 
         mTextForgetPwd.setOnClickListener(this);
         mButtonLogin.setOnClickListener(this);
