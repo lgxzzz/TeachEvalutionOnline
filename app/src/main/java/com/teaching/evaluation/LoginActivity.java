@@ -3,6 +3,10 @@ package com.teaching.evaluation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.teaching.evaluation.jdbc.JdbcMgr;
+import com.teaching.evaluation.manager.LoginManager;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
@@ -23,14 +28,17 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     Button mButtonLogin; //登陆
     Button mButtonRegister;//注册
 
-    JdbcMgr mJdbcMgr;
+    LoginManager mLoginManager;
+
+    String mUserName = null;
+    String mPwd = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        mJdbcMgr = new JdbcMgr();
+        mLoginManager = LoginManager.getInstance();
 
         initView();
 
@@ -48,6 +56,40 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         mTextForgetPwd.setOnClickListener(this);
         mButtonLogin.setOnClickListener(this);
         mButtonRegister.setOnClickListener(this);
+
+        mEditTextName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                 mUserName = editable.toString();
+            }
+        });
+
+        mEditTextPwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                    mPwd = editable.toString();
+            }
+        });
     }
 
 
@@ -68,12 +110,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public void testJDBC(){
-        mJdbcMgr.getConnection();
-
-        //查询所有老师
 
 
-        mJdbcMgr.closeConnection();
-    }
 }

@@ -3,6 +3,7 @@
     package="com.teaching.evaluation">
     <permission android:name="android.permission.INTERNET"></permission>
     <application
+        android:name=".TeachingEvaApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:theme="@android:style/Theme.Black.NoTitleBar"

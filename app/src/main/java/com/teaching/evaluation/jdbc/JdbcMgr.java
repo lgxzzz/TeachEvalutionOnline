@@ -69,21 +69,15 @@ public class JdbcMgr {
                     pstm.setObject(i+1,params.get(i));
                 }
             }
-
             rs = pstm.executeQuery();
             ResultSetMetaData rsData = rs.getMetaData();
             while(rs.next()){
                 map = new HashMap<>();
 
             }
-
         }catch (Exception e){
             e.printStackTrace();
         }
-
-
-
-
         return map;
     }
 
