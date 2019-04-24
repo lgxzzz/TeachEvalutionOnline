@@ -9,6 +9,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.teaching.evaluation.jdbc.JdbcMgr;
+
 public class LoginActivity extends Activity implements View.OnClickListener {
 
     EditText mEditTextName;//输入的名称
@@ -21,10 +23,15 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     Button mButtonLogin; //登陆
     Button mButtonRegister;//注册
 
+    JdbcMgr mJdbcMgr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        mJdbcMgr = new JdbcMgr();
+
         initView();
 
     }
@@ -59,5 +66,14 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             case R.id.register:
                 break;
         }
+    }
+
+    public void testJDBC(){
+        mJdbcMgr.getConnection();
+
+        //查询所有老师
+
+
+        mJdbcMgr.closeConnection();
     }
 }
