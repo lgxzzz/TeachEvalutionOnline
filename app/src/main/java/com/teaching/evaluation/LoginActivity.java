@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.jdbc.JdbcMgr;
 import com.teaching.evaluation.manager.LoginManager;
 
@@ -92,7 +94,26 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         });
     }
 
+    public void doLogin(){
+        if (mUserName !=null && mUserName.length()>0){
+            Toast.makeText(LoginActivity.this,"用户名不能未空",Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        if (mPwd !=null && mPwd.length()>0){
+            Toast.makeText(LoginActivity.this,"密码不能未空",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User user = new User();
+        user.setName(mUserName);
+        user.setPwd(mPwd);
+        mLoginManager.doLogin(user);
+    }
+
+    public void register(){
+
+    }
 
     @Override
     public void onClick(View v) {
