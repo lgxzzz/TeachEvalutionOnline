@@ -95,12 +95,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
     public void doLogin(){
-        if (mUserName !=null && mUserName.length()>0){
+        if (mUserName ==null || mUserName.length()==0){
             Toast.makeText(LoginActivity.this,"用户名不能未空",Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (mPwd !=null && mPwd.length()>0){
+        if (mPwd ==null|| mPwd.length()==0){
             Toast.makeText(LoginActivity.this,"密码不能未空",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -122,11 +122,14 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             case R.id.forget_pwd:
                 break;
             case R.id.login:
-                Intent mIntent = new Intent();
-                mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.MainActivity");
-                startActivity(mIntent);
+                doLogin();
+
+//                Intent mIntent = new Intent();
+//                mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.MainActivity");
+//                startActivity(mIntent);
                 break;
             case R.id.register:
+                register();
                 break;
         }
     }
