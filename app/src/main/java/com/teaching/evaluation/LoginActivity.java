@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teaching.evaluation.bean.User;
+import com.teaching.evaluation.constant.UserConstant;
 import com.teaching.evaluation.jdbc.JdbcMgr;
 import com.teaching.evaluation.manager.LoginManager;
 
@@ -41,6 +42,20 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.login);
 
         mLoginManager = LoginManager.getInstance();
+        mLoginManager.setListenter(new LoginManager.LoginListenter()
+        {
+            @Override
+            public void onSuccess() {
+                Intent mIntent = new Intent();
+                mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.MainActivity");
+                startActivity(mIntent);
+            }
+
+            @Override
+            public void onError(int error) {
+                Toast.makeText(LoginActivity.this,"登陆失败，请检查账号密码",Toast.LENGTH_LONG);
+            }
+        });
 
         initView();
 
@@ -111,8 +126,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         mLoginManager.doLogin(user);
     }
 
-    public void register(){
-
+    public void chooseRole(){
+        Intent mIntent = new Intent();
+        mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.ChooseRoleActivity");
+        startActivity(mIntent);
     }
 
     @Override
@@ -123,13 +140,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.login:
                 doLogin();
-
-//                Intent mIntent = new Intent();
-//                mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.MainActivity");
-//                startActivity(mIntent);
                 break;
             case R.id.register:
-                register();
+                chooseRole();
                 break;
         }
     }

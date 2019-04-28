@@ -14,6 +14,7 @@ public class LoginManager {
 
     private User mLoginUser;
 
+    private LoginListenter mListenter;
 
     private JdbcMgr mJdbcMgr;
 
@@ -33,15 +34,25 @@ public class LoginManager {
         mJdbcMgr.closeConnection();
     }
 
+    public void setListenter(LoginListenter listenter){
+        this.mListenter = listenter;
+    }
+
     //登录
     public void doLogin(User user){
         if(user!=null){
             this.mLoginUser = user;
         }
+        mListenter.onSuccess();
     }
 
     //登出
     public void logout(){
         mLoginUser = null;
+    }
+
+    public interface LoginListenter{
+        public void onSuccess();
+        public void onError(int error);
     }
 }
