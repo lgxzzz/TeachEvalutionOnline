@@ -132,6 +132,11 @@ public class TreeListView extends LinearLayout {
         mTeacherData.add("张老师");
         mTeacherData.add("黄老师");
         mTeacherData.add("赵老师");
+
+        mCourseData.add("语文");
+        mCourseData.add("数学");
+        mCourseData.add("英语");
+        mCourseData.add("体育");
     }
 
     class NodeAdapter extends BaseAdapter{
