@@ -43,6 +43,8 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
         createTableStudent(db);
         createTableTeacher(db);
         createTableUser(db);
+
+        initData(db);
     }
 
     @Override
@@ -88,8 +90,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
 
 
     //------------------------------初始化数据--------------------------------------------------//
-    public void initData(){
-        SQLiteDatabase database = getWritableDatabase();
+    public void initData( SQLiteDatabase database){
         //导入学生数据
         for (int i= 0;i<DataSourse.STUDENT.length;i++){
             ContentValues contentValues = new ContentValues();

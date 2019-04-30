@@ -128,7 +128,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     public void chooseRole(){
         Intent mIntent = new Intent();
-        mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.ChooseRoleActivity");
+//        mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.ChooseRoleActivity");
+        mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.test.DBTestAcitivity");
         startActivity(mIntent);
     }
 

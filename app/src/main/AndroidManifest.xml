@@ -18,6 +18,7 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".ChooseRoleActivity"></activity>
         <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".test.DBTestAcitivity"></activity>
     </application>
 
 </manifest>
