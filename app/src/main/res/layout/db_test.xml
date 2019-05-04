@@ -5,6 +5,12 @@
     android:background="@android:color/white"
     android:orientation="vertical"
     >
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="初始化数据"
+        android:id="@+id/init_data"
+        />
     <Spinner
         android:id="@+id/spinner_table"
         android:layout_marginTop="10dp"

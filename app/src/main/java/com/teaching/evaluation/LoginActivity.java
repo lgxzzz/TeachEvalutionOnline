@@ -10,11 +10,13 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teaching.evaluation.bean.User;
+import com.teaching.evaluation.constant.ErrorCode;
 import com.teaching.evaluation.constant.UserConstant;
 import com.teaching.evaluation.jdbc.JdbcMgr;
 import com.teaching.evaluation.manager.LoginManager;
@@ -30,6 +32,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     Button mButtonLogin; //登陆
     Button mButtonRegister;//注册
+    Button mButtonTestDB;//测试数据
 
     LoginManager mLoginManager;
 
@@ -41,21 +44,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        mLoginManager = LoginManager.getInstance();
-        mLoginManager.setListenter(new LoginManager.LoginListenter()
-        {
-            @Override
-            public void onSuccess() {
-                Intent mIntent = new Intent();
-                mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.MainActivity");
-                startActivity(mIntent);
-            }
-
-            @Override
-            public void onError(int error) {
-                Toast.makeText(LoginActivity.this,"登陆失败，请检查账号密码",Toast.LENGTH_LONG);
-            }
-        });
+        mLoginManager = LoginManager.getInstance(this);
 
         initView();
 
@@ -69,10 +58,21 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         mTextForgetPwd = (TextView) findViewById(R.id.forget_pwd);
         mButtonLogin = (Button) findViewById(R.id.login);
         mButtonRegister = (Button) findViewById(R.id.register);
+        mButtonTestDB = (Button) findViewById(R.id.test_db);
 
         mTextForgetPwd.setOnClickListener(this);
         mButtonLogin.setOnClickListener(this);
         mButtonRegister.setOnClickListener(this);
+        mButtonTestDB.setOnClickListener(this);
+
+        boolean isRemind = mLoginManager.isRemindPwd();
+        if (isRemind){
+            mUserName = mLoginManager.getPreName();
+            mPwd = mLoginManager.getPrePwd();
+            mCheckBoxRemindPwd.setChecked(true);
+            mEditTextName.setText(mUserName);
+            mEditTextPwd.setText(mPwd);
+        }
 
         mEditTextName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -107,7 +107,16 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     mPwd = editable.toString();
             }
         });
+
+        mCheckBoxRemindPwd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                mLoginManager.savePWd(b,mUserName,mPwd);
+            }
+        });
     }
+
+
 
     public void doLogin(){
         if (mUserName ==null || mUserName.length()==0){
@@ -123,12 +132,29 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         User user = new User();
         user.setName(mUserName);
         user.setPwd(mPwd);
-        mLoginManager.doLogin(user);
+        mLoginManager.doLogin(user, new LoginManager.LoginListenter() {
+            @Override
+            public void onSuccess() {
+                Intent mIntent = new Intent();
+                mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.MainActivity");
+                startActivity(mIntent);
+            }
+
+            @Override
+            public void onError(int error) {
+                Toast.makeText(LoginActivity.this,"登陆失败，请检查账号密码",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void chooseRole(){
         Intent mIntent = new Intent();
-//        mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.ChooseRoleActivity");
+        mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.ChooseRoleActivity");
+        startActivity(mIntent);
+    }
+
+    public void testDB(){
+        Intent mIntent = new Intent();
         mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.test.DBTestAcitivity");
         startActivity(mIntent);
     }
@@ -144,6 +170,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.register:
                 chooseRole();
+                break;
+            case R.id.test_db:
+                testDB();
                 break;
         }
     }

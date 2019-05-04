@@ -6,48 +6,11 @@
     >
     <LinearLayout
         android:layout_width="0.0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="1"
         android:gravity="center"
         android:layout_marginTop="10dp"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            >
-            <ImageButton
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@drawable/college"
-                android:layout_margin="3dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:text="学院"
-                android:textSize="25dp"
-                android:layout_margin="3dp"
-                />
-        </LinearLayout>
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/college_listview"
-            >
-        </ListView>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="0.0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
         android:id="@+id/tree_tch_layout"
         >
         <LinearLayout
@@ -73,19 +36,18 @@
         </LinearLayout>
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:id="@+id/teacher_listview"
             >
         </ListView>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0.0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:gravity="center"
         android:layout_marginTop="10dp"
-        android:visibility="gone"
         android:id="@+id/tree_course_layout"
         >
         <LinearLayout
@@ -111,7 +73,7 @@
         </LinearLayout>
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
             android:id="@+id/course_listview"
             >
         </ListView>

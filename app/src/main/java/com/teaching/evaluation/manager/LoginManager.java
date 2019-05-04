@@ -1,5 +1,9 @@
 package com.teaching.evaluation.manager;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.jdbc.JdbcMgr;
 
@@ -10,46 +14,86 @@ import com.teaching.evaluation.jdbc.JdbcMgr;
 
 public class LoginManager {
 
-    private static final LoginManager gManager = new LoginManager();
-
+    private static LoginManager gManager= null;
     private User mLoginUser;
+    private SharedPreferences sp;
+    private Context mContext;
 
-    private LoginListenter mListenter;
-
-    private JdbcMgr mJdbcMgr;
-
-
-    private LoginManager() {
-        mJdbcMgr = new JdbcMgr();
+    private LoginManager(Context context) {
+        this.mContext = context;
+        sp = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public static LoginManager getInstance() {
+    public static LoginManager getInstance(Context context) {
+        if (gManager==null){
+            gManager = new LoginManager(context);
+        }
         return gManager;
     }
 
-    //测试数据库
-    public void testJDBC(){
-        mJdbcMgr.getConnection();
-        //查询所有老师
-        mJdbcMgr.closeConnection();
-    }
-
-    public void setListenter(LoginListenter listenter){
-        this.mListenter = listenter;
-    }
-
     //登录
-    public void doLogin(User user){
-        if(user!=null){
-            this.mLoginUser = user;
+    public void doLogin(final User user,final LoginListenter listenter){
+        this.mLoginUser = user;
+        if (isRemindPwd())
+        {
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("name",user.getName());
+            editor.putString("pwd",user.getPwd());
+            editor.commit();
         }
-        mListenter.onSuccess();
+        DBManager.getInstance(mContext).doLogin(user, new DBManager.DBManagerListener() {
+            @Override
+            public void onSuccess() {
+
+                listenter.onSuccess();
+            }
+
+            @Override
+            public void onFail(int error) {
+                listenter.onError(error);
+            }
+        });
+
     }
 
     //登出
     public void logout(){
         mLoginUser = null;
     }
+
+    //是否记住密码
+    public void savePWd(boolean save,String name,String pwd){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("remind_pwd",save);
+        if (save){
+            editor.putString("name",name);
+            editor.putString("pwd",pwd);
+        }else {
+            editor.remove("name");
+            editor.remove("pwd");
+        }
+
+        editor.commit();
+    }
+
+    public boolean isRemindPwd(){
+        boolean isRemind = sp.getBoolean("remind_pwd",false);
+        return isRemind;
+    }
+
+    public String getPreName(){
+        return sp.getString("name","");
+    }
+
+    public String getPrePwd(){
+        return sp.getString("pwd","");
+    }
+
+    public User getUser(){
+        return mLoginUser;
+    }
+
+
 
     public interface LoginListenter{
         public void onSuccess();

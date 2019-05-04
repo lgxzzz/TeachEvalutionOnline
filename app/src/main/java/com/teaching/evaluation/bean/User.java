@@ -7,6 +7,16 @@ package com.teaching.evaluation.bean;
 public class User {
     private String name;
     private String pwd;
+    private String number;
+    private String role;
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
     public String getName() {
         return name;
@@ -23,4 +33,17 @@ public class User {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String toString(){
+        return name+" "+number+" "+pwd+" "+role;
+    }
+
 }

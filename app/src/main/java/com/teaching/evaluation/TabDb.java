@@ -7,17 +7,17 @@ public class TabDb {
     }
     public static int[] getTabsImg(){
         int[] ids={
-                R.drawable.ic_launcher_background,
-                R.drawable.ic_launcher_background,
-                R.drawable.ic_launcher_background,
+                R.drawable.course,
+                R.drawable.evaluation,
+                R.drawable.myself,
         };
         return ids;
     }
     public static int[] getTabsImgLight(){
         int[] ids={
-                R.drawable.ic_launcher_background,
-                R.drawable.ic_launcher_background,
-                R.drawable.ic_launcher_background,
+                R.drawable.course,
+                R.drawable.evaluation,
+                R.drawable.myself,
         };
         return ids;
     }

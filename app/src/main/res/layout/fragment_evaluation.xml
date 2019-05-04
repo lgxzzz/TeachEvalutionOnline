@@ -8,22 +8,21 @@
     tools:context=".EvaluationFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="全部"
-            android:layout_weight="1"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="搜索"
-            android:layout_weight="1"
-            />
-    </LinearLayout>
+    <EditText
+    android:id="@+id/alertDialog_et"
+    android:background="@drawable/bg_edittext"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginBottom="10dp"
+    android:textColor="#008A00"
+    android:maxLength="3"
+        android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:hint="搜索" />
     <com.teaching.evaluation.view.TreeListView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

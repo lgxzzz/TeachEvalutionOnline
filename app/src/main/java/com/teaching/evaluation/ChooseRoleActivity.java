@@ -19,6 +19,7 @@ public class ChooseRoleActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_role);
+        initView();
     }
 
     public void initView(){

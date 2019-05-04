@@ -11,11 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.teaching.evaluation.R;
+import com.teaching.evaluation.RegisterActivity;
+import com.teaching.evaluation.bean.College;
+import com.teaching.evaluation.bean.Course;
+import com.teaching.evaluation.bean.Student;
+import com.teaching.evaluation.bean.Teacher;
+import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.data.SQLiteDbHelper;
 import com.teaching.evaluation.manager.DBManager;
 import com.teaching.evaluation.view.TreeListView;
@@ -30,6 +37,7 @@ import java.util.List;
 public class DBTestAcitivity extends Activity {
 
     private Spinner mSpinner;
+    private Button mInitDataBtn;
     private ListView mListview;
     private NodeAdapter mAdapter;
     private List<String> mList = new ArrayList<>();
@@ -38,6 +46,15 @@ public class DBTestAcitivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.db_test);
+
+        mInitDataBtn = (Button)findViewById(R.id.init_data);
+        mInitDataBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DBManager.getInstance(DBTestAcitivity.this).initData();
+                refreshList("学生");
+            }
+        });
 
         mSpinner = (Spinner) findViewById(R.id.spinner_table);
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -61,12 +78,35 @@ public class DBTestAcitivity extends Activity {
     public void refreshList(String table){
         mList.clear();
         DBManager dbManager = DBManager.getInstance(this);
-        Cursor cursor = null;
         if (table.equals("学生")){
-            cursor = dbManager.query(SQLiteDbHelper.TAB_STUDENT,null,null,null,null,null,null);
-            while (cursor.moveToNext()){
-                String name = cursor.getColumnName(cursor.getColumnIndex("stu_name"));
-                mList.add(name);
+            List<Student> students;
+            students = dbManager.queryStudent(null,null,null,null,null,null);
+            for (int i= 0;i<students.size();i++){
+                mList.add(students.get(i).toString());
+            }
+        }else if(table.equals("用户")){
+            List<User> users;
+            users = dbManager.queryUser(null,null,null,null,null,null);
+            for (int i= 0;i<users.size();i++){
+                mList.add(users.get(i).toString());
+            }
+        }else if(table.equals("老师")){
+            List<Teacher> teachers;
+            teachers = dbManager.queryTeacher(null,null,null,null,null,null);
+            for (int i= 0;i<teachers.size();i++){
+                mList.add(teachers.get(i).toString());
+            }
+        }else if(table.equals("学院")){
+            List<College> colleges;
+            colleges = dbManager.queryCollege(null,null,null,null,null,null);
+            for (int i= 0;i<colleges.size();i++){
+                mList.add(colleges.get(i).toString());
+            }
+        }else if(table.equals("课程")){
+            List<Course> courses;
+            courses = dbManager.queryCourse(null,null,null,null,null,"tch_name");
+            for (int i= 0;i<courses.size();i++){
+                mList.add(courses.get(i).toString());
             }
         }
 

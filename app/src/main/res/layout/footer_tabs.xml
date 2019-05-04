@@ -9,9 +9,8 @@
     >
     <ImageView
         android:id="@+id/ivImg"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:background="@mipmap/ic_launcher"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         />
     <TextView
         android:id="@+id/tvTab"
