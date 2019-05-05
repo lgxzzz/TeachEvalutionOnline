@@ -126,6 +126,7 @@ public class DBManager {
         while (cursor.moveToNext()){
             String course_name = cursor.getString(cursor.getColumnIndex("course_name"));
             String course_hour = cursor.getString(cursor.getColumnIndex("course_hour"));
+            String course_credit = cursor.getString(cursor.getColumnIndex("course_credit"));
             String ach_point = cursor.getString(cursor.getColumnIndex("ach_point"));
             String place = cursor.getString(cursor.getColumnIndex("place"));
             String tch_number = cursor.getString(cursor.getColumnIndex("tch_name"));
@@ -135,6 +136,7 @@ public class DBManager {
             course.setAch_point(ach_point);
             course.setPlace(place);
             course.setTch_name(tch_number);
+            course.setCredit(course_credit);
             courses.add(course);
         }
         db.close();

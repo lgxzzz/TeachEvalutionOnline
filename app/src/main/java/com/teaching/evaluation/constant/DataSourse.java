@@ -98,4 +98,17 @@ public class DataSourse {
             "大教室4",
             "大教室5",
     };
+
+    public static String[] TIMES = new String[]{
+            "周一",
+            "周二",
+            "周三",
+            "周四",
+            "周五",
+            "周六",
+            "周天",
+
+    };
+
+
 }

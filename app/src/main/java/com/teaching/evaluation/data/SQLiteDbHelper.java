@@ -15,7 +15,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //数据库名称
     public static final String DB_NAME = "database.db";
     //数据库版本号
-    public static int DB_VERSION = 6;
+    public static int DB_VERSION = 7;
     //学生表
     public static final String TAB_STUDENT = "student";
     //老师表
@@ -108,6 +108,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                 "course_name varchar(60), " +
                 "course_credit varchar(60), " +
                 "course_hour varchar(60), " +
+                "course_time varchar(60), " +
                 "ach_point varchar(60), " +
                 "place varchar(60), " +
                 "tch_name varchar(60))");
@@ -154,6 +155,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             contentValues.put("course_name",DataSourse.COURSE[i]);
             contentValues.put("course_credit",new Random().nextInt(10));
             contentValues.put("course_hour",new Random().nextInt(20));
+            contentValues.put("course_time",DataSourse.TIMES[new Random().nextInt(DataSourse.TIMES.length-1)]);
             contentValues.put("ach_point",0.5f+"");
             contentValues.put("place",DataSourse.PLACES[new Random().nextInt(DataSourse.PLACES.length-1)]);
             contentValues.put("tch_name",DataSourse.TEACHER[new Random().nextInt(DataSourse.TEACHER.length-1)]);

@@ -1,16 +1,24 @@
 package com.teaching.evaluation.bean;
 
+import com.bin.david.form.annotation.SmartColumn;
+
 /**
  * Created by lgx on 2019/4/22.
  */
 
 public class Course {
+    @SmartColumn(id = 1,name ="课程名称")
     public String name;
+    @SmartColumn(id = 2,name ="学分")
     public String credit;
+    @SmartColumn(id = 3,name ="学时")
     public String hour;
+    @SmartColumn(id = 4,name ="绩效点")
     public String ach_point;
+    @SmartColumn(id = 5,name ="上课地点")
     public String place;
-
+    @SmartColumn(id = 6,name ="教师")
+    public String tch_name;
     public String getTch_name() {
         return tch_name;
     }
@@ -19,7 +27,6 @@ public class Course {
         this.tch_name = tch_name;
     }
 
-    public String tch_name;
 
     public String getName() {
         return name;

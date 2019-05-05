@@ -3,10 +3,21 @@ package com.teaching.evaluation;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.bin.david.form.annotation.SmartColumn;
+import com.bin.david.form.core.SmartTable;
+import com.bin.david.form.data.column.Column;
+import com.bin.david.form.data.table.TableData;
+import com.teaching.evaluation.bean.Course;
+import com.teaching.evaluation.manager.DBManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -28,6 +39,9 @@ public class CourseFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private SmartTable<Course> table;
+    private Handler mHandler = new Handler();
 
     public CourseFragment() {
         // Required empty public constructor
@@ -64,7 +78,28 @@ public class CourseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course, container, false);
+        View view = inflater.inflate(R.layout.fragment_course, container, false);
+        table = (SmartTable<Course>) view.findViewById(R.id.table);
+        final List<Course> students  = DBManager.getInstance(this.getContext()).queryCourse(null,null,null,null,null,null);
+
+
+        Column<String> courseNameColumn = new Column<>("课程名称","name");
+        Column<String> courseCreditColumn = new Column<>("学分","credit");
+        Column<String> courseHourColumn = new Column<>("学时","hour");
+        Column<String> courseAchPointColumn = new Column<>("绩效点","ach_point");
+        Column<String> coursePlaceColumn = new Column<>("上课地点","place");
+        Column<String> courseTchNameColumn = new Column<>("教师","tch_name");
+
+        final TableData<Course> tableData = new TableData<>("课程表",students,courseNameColumn,courseCreditColumn,courseHourColumn,courseAchPointColumn,coursePlaceColumn,courseTchNameColumn);
+        table.setTableData(tableData);
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mHandler.postDelayed(this,5000);
+                table.addData(students,true);
+            }
+        },5000);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

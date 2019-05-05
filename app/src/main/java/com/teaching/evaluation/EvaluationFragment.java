@@ -3,10 +3,27 @@ package com.teaching.evaluation;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.bin.david.form.core.SmartTable;
+import com.bin.david.form.core.TableConfig;
+import com.bin.david.form.data.CellInfo;
+import com.bin.david.form.data.column.Column;
+import com.bin.david.form.data.format.bg.BaseBackgroundFormat;
+import com.bin.david.form.data.format.bg.BaseCellBackgroundFormat;
+import com.bin.david.form.data.format.bg.ICellBackgroundFormat;
+import com.bin.david.form.data.style.FontStyle;
+import com.bin.david.form.data.table.TableData;
+import com.teaching.evaluation.bean.Course;
+import com.teaching.evaluation.bean.Student;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -28,6 +45,8 @@ public class EvaluationFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+
 
     public EvaluationFragment() {
         // Required empty public constructor
@@ -58,13 +77,17 @@ public class EvaluationFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_evaluation, container, false);
+        View  view= inflater.inflate(R.layout.fragment_evaluation, container, false);
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

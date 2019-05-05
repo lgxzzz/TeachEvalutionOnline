@@ -4,6 +4,7 @@ package com.teaching.evaluation.view;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -121,6 +122,9 @@ public class TreeListDialog extends Dialog {
                     adapter.setSelectIndex(i);
                     adapter.notifyDataSetChanged();
 
+                    Intent mIntent = new Intent();
+                    mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.EvaluationActivity");
+                    TreeListDialog.this.context.startActivity(mIntent);
                 }
             }
         });
