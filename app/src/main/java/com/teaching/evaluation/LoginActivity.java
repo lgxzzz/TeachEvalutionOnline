@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.constant.ErrorCode;
 import com.teaching.evaluation.constant.UserConstant;
-import com.teaching.evaluation.jdbc.JdbcMgr;
 import com.teaching.evaluation.manager.LoginManager;
 
 public class LoginActivity extends Activity implements View.OnClickListener {

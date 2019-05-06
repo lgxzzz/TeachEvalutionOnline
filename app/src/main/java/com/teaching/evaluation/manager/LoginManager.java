@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.teaching.evaluation.bean.User;
-import com.teaching.evaluation.jdbc.JdbcMgr;
 
 /**
  * Created by lgx on 2019/4/24.

@@ -5,6 +5,7 @@
     android:background="@android:color/white"
     android:orientation="vertical"
     >
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +28,35 @@
             android:id="@+id/eva_edit_btn"
             />
     </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="课程名称"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/eva_course_name"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="教师名称"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/eva_tch_name"
+            />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,11 +73,13 @@
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_marginRight="20dp"
+            android:id="@+id/eva_number"
             />
         <com.teaching.evaluation.view.EvaRatingView
             android:layout_width="0.0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/eva_rating"
             ></com.teaching.evaluation.view.EvaRatingView>
 
     </LinearLayout>
@@ -68,10 +100,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15dp"
-            android:text="评论人数102人"
+            android:text="评论人数0人"
             android:textColor="@android:color/black"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
+            android:id="@+id/eva_people_count"
             />
     </RelativeLayout>
     <TextView
@@ -85,7 +118,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/evaluation_list"
+        android:id="@+id/eva_list"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         >
