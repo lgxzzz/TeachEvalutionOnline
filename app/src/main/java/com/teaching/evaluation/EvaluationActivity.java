@@ -9,6 +9,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.teaching.evaluation.bean.Course;
+import com.teaching.evaluation.bean.Evaluation;
+import com.teaching.evaluation.manager.DBManager;
 import com.teaching.evaluation.manager.LoginManager;
 import com.teaching.evaluation.view.EditEvaluaDialog;
 import com.teaching.evaluation.view.EvaRatingView;
@@ -68,6 +70,6 @@ public class EvaluationActivity extends Activity {
 
 
     public void initData(){
-
+        List<Evaluation> evaluations = DBManager.getInstance(this).queryEvaluations(null,"",new String[]{},null,null,null);
     }
 }
