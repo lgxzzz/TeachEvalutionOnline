@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_margin="10dp"
+        android:id="@+id/eva_content"
         />
     <Button
         android:layout_width="200dp"
@@ -29,6 +30,7 @@
         android:text="提交"
         android:textStyle="bold"
         android:textSize="20dp"
+        android:id="@+id/eva_sure"
         />
     <Button
         android:layout_width="200dp"
@@ -38,5 +40,6 @@
         android:textStyle="bold"
         android:textSize="20dp"
         android:layout_marginBottom="30dp"
+        android:id="@+id/eva_cancel"
         />
 </LinearLayout>

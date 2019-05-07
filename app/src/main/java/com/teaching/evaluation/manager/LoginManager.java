@@ -32,7 +32,7 @@ public class LoginManager {
 
     //登录
     public void doLogin(final User user,final LoginListenter listenter){
-        this.mLoginUser = user;
+
         if (isRemindPwd())
         {
             SharedPreferences.Editor editor = sp.edit();
@@ -42,8 +42,8 @@ public class LoginManager {
         }
         DBManager.getInstance(mContext).doLogin(user, new DBManager.DBManagerListener() {
             @Override
-            public void onSuccess() {
-
+            public void onSuccess(User user) {
+                mLoginUser = user;
                 listenter.onSuccess();
             }
 

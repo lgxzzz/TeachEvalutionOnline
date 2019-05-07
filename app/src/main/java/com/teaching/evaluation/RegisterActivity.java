@@ -159,7 +159,7 @@ public class RegisterActivity extends Activity{
 
                 DBManager.getInstance(RegisterActivity.this).addUser(user, new DBManager.DBManagerListener() {
                     @Override
-                    public void onSuccess() {
+                    public void onSuccess(User user) {
                         Intent mIntent = new Intent();
                         mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.MainActivity");
                         startActivity(mIntent);

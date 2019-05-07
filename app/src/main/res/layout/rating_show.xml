@@ -52,7 +52,7 @@
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:id="@+id/progressbar_five"
             android:max="100"
-            android:progress="90"
+            android:progress="0"
             android:progressDrawable="@drawable/progress_bar"
             />
     </LinearLayout>
@@ -102,7 +102,7 @@
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:id="@+id/progressbar_four"
             android:max="100"
-            android:progress="20"
+            android:progress="0"
             android:progressDrawable="@drawable/progress_bar"
             />
     </LinearLayout>
@@ -154,7 +154,7 @@
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:id="@+id/progressbar_three"
             android:max="100"
-            android:progress="30"
+            android:progress="0"
             android:progressDrawable="@drawable/progress_bar"
             />
     </LinearLayout>
@@ -208,7 +208,7 @@
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:id="@+id/progressbar_two"
             android:max="100"
-            android:progress="10"
+            android:progress="0"
             android:progressDrawable="@drawable/progress_bar"
             />
     </LinearLayout>
@@ -264,7 +264,7 @@
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:id="@+id/progressbar_one"
             android:max="100"
-            android:progress="10"
+            android:progress="0"
             android:progressDrawable="@drawable/progress_bar"
             />
     </LinearLayout>

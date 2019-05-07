@@ -15,7 +15,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //数据库名称
     public static final String DB_NAME = "database.db";
     //数据库版本号
-    public static int DB_VERSION = 7;
+    public static int DB_VERSION = 11;
     //学生表
     public static final String TAB_STUDENT = "student";
     //老师表
@@ -45,6 +45,8 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
         createTableUser(db);
         createTableCollege(db);
         createTableCourse(db);
+        createTableEvaluate(db);
+
     }
 
     @Override
@@ -54,6 +56,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TAB_STUDENT);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_COLLEGE);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_COURSE);
+        db.execSQL("DROP TABLE IF EXISTS "+TAB_EVALUATE);
 //        db.execSQL("DROP TABLE IF EXISTS "+TAB_MAJOR);
         onCreate(db);
     }
@@ -115,7 +118,15 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     }
 
     //创建评分表
-
+    public void createTableEvaluate(SQLiteDatabase db){
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_EVALUATE +
+                "(id integer primary key autoincrement, " +
+                "user_number varchar(60), " +
+                "tch_name varchar(60), " +
+                "course_name varchar(60), " +
+                "eva_score varchar(60), " +
+                "content varchar(60))");
+    }
 
     //------------------------------初始化数据--------------------------------------------------//
     public void initData(){

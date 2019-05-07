@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.teaching.evaluation.bean.College;
 import com.teaching.evaluation.bean.Course;
+import com.teaching.evaluation.bean.Evaluation;
 import com.teaching.evaluation.bean.Student;
 import com.teaching.evaluation.bean.Teacher;
 import com.teaching.evaluation.bean.User;
@@ -143,6 +144,39 @@ public class DBManager {
         return courses;
     }
 
+    //所有评价
+    public List<Evaluation> queryEvaluations(String[] columns, String selection, String[]  selectionArgs, String groupBy, String having, String  orderBy){
+        List<Evaluation> evaluations = new ArrayList<>();
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        Cursor cursor = db.query(SQLiteDbHelper.TAB_EVALUATE,columns,selection,selectionArgs,groupBy,having,orderBy);
+        while (cursor.moveToNext()){
+            String user_number = cursor.getString(cursor.getColumnIndex("user_number"));
+            String course_name = cursor.getString(cursor.getColumnIndex("course_name"));
+            String tch_name = cursor.getString(cursor.getColumnIndex("tch_name"));
+            String content = cursor.getString(cursor.getColumnIndex("content"));
+            Evaluation evaluation = new Evaluation();
+            evaluation.setContent(content);
+            evaluation.setCourse_name(course_name);
+            evaluation.setUser_number(user_number);
+            evaluation.setTch_name(tch_name);
+            evaluations.add(evaluation);
+        }
+        db.close();
+        return evaluations;
+    }
+
+    //添加评论记录
+    public void addEvalution(Evaluation evaluation){
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("course_name",evaluation.getCourse_name());
+        contentValues.put("user_number",evaluation.getUser_number());
+        contentValues.put("tch_name",evaluation.getTch_name());
+        contentValues.put("content",evaluation.getContent());
+        contentValues.put("eva_score",evaluation.getEva_score());
+        long x = db.insert(SQLiteDbHelper.TAB_EVALUATE,null,contentValues);
+    }
+
     public void execSQL(String sql){
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         db.execSQL(sql);
@@ -177,7 +211,7 @@ public class DBManager {
         contentValues.put("user_number",user.getNumber());
         db.insert(SQLiteDbHelper.TAB_USER,null,contentValues);
         db.close();
-        listener.onSuccess();
+        listener.onSuccess(user);
     }
 
     //登陆
@@ -186,7 +220,11 @@ public class DBManager {
             SQLiteDatabase db = mDbHelper.getWritableDatabase();
             Cursor cursor = db.rawQuery("select * from user where user_name =? and user_pwd=?",new String[]{user.getName(),user.getPwd()});
             if (cursor.moveToFirst()){
-                listener.onSuccess();
+                String user_number = cursor.getString(cursor.getColumnIndex("user_number"));
+                String user_role = cursor.getString(cursor.getColumnIndex("user_role"));
+                user.setRole(user_role);
+                user.setNumber(user_number);
+                listener.onSuccess(user);
             }else{
                 listener.onFail(ErrorCode.ERROR_SEARCH);
             }
@@ -200,7 +238,7 @@ public class DBManager {
     }
 
     public interface DBManagerListener{
-        public void onSuccess();
+        public void onSuccess(User user);
         public void onFail(int error);
     }
 }

@@ -103,7 +103,7 @@ public class TreeListDialog extends Dialog {
 
     public void updateCourseListView(String tch_name){
         mCourseData.clear();
-        List<Course> courses = DBManager.getInstance(this.context).queryCourse(null,"tch_name =?",new String[]{tch_name},null,null,null);
+        final List<Course> courses = DBManager.getInstance(this.context).queryCourse(null,"tch_name =?",new String[]{tch_name},null,null,null);
         for (int i=0;i<courses.size();i++){
             Course course = courses.get(i);
             mCourseData.add(course.getName());
@@ -122,7 +122,10 @@ public class TreeListDialog extends Dialog {
                     adapter.setSelectIndex(i);
                     adapter.notifyDataSetChanged();
 
+                    Course course = courses.get(i);
                     Intent mIntent = new Intent();
+                    mIntent.putExtra("course_name",course.getName());
+                    mIntent.putExtra("tch_name",course.getTch_name());
                     mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.EvaluationActivity");
                     TreeListDialog.this.context.startActivity(mIntent);
                 }
