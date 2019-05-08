@@ -92,13 +92,6 @@ public class CourseFragment extends Fragment {
 
         final TableData<Course> tableData = new TableData<>("课程表",students,courseNameColumn,courseCreditColumn,courseHourColumn,courseAchPointColumn,coursePlaceColumn,courseTchNameColumn);
         table.setTableData(tableData);
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mHandler.postDelayed(this,5000);
-                table.addData(students,false);
-            }
-        },5000);
         return view;
     }
 

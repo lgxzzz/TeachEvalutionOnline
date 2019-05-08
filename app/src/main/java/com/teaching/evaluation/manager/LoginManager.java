@@ -58,6 +58,7 @@ public class LoginManager {
     //登出
     public void logout(){
         mLoginUser = null;
+
     }
 
     //是否记住密码

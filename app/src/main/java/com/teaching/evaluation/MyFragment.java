@@ -7,6 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.teaching.evaluation.bean.User;
+import com.teaching.evaluation.manager.LoginManager;
 
 
 /**
@@ -28,6 +35,12 @@ public class MyFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private TextView mUserName;
+    private LinearLayout mEditCourseBtn;
+    private LinearLayout mInsertCourseBtn;
+
+    private Button mExApp;
 
     public MyFragment() {
         // Required empty public constructor
@@ -64,7 +77,25 @@ public class MyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my, container, false);
+        View view = inflater.inflate(R.layout.fragment_my, container, false);
+
+        mUserName = (TextView) view.findViewById(R.id.user_name);
+        mEditCourseBtn = (LinearLayout)view.findViewById(R.id.edit_cousr_layout);
+        mInsertCourseBtn = (LinearLayout)view.findViewById(R.id.insert_cousr_layout);
+        User user = LoginManager.getInstance(getContext()).getUser();
+        mUserName.setText(user.getName());
+        if (user.getRole().equals("老师")){
+            mEditCourseBtn.setVisibility(View.VISIBLE);
+            mInsertCourseBtn.setVisibility(View.VISIBLE);
+        }
+        mExApp = (Button)view.findViewById(R.id.exit_app_btn);
+        mExApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginManager.getInstance(getContext()).logout();
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
