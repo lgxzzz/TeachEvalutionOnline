@@ -5,7 +5,16 @@ public class Evaluation {
     String tch_name;
     String user_number;
     String course_name;
+    String course_time;
     String eva_score;
+
+    public String getCourse_time() {
+        return course_time;
+    }
+
+    public void setCourse_time(String course_time) {
+        this.course_time = course_time;
+    }
 
     public String getEva_score() {
         return eva_score;

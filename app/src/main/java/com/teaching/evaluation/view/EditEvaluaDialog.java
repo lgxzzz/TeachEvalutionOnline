@@ -29,7 +29,9 @@ import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.manager.DBManager;
 import com.teaching.evaluation.manager.LoginManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -94,6 +96,9 @@ public class EditEvaluaDialog extends Dialog {
                 evaluation.setUser_number(user.getNumber());
                 evaluation.setEva_score(mEvaScore);
                 evaluation.setContent(mContent);
+                SimpleDateFormat   formatter   =   new SimpleDateFormat("yyyy年MM月dd日");
+                Date curDate =  new Date(System.currentTimeMillis());
+                evaluation.setCourse_time(formatter.format(curDate));
                 DBManager.getInstance(context).addEvalution(evaluation);
                 dismiss();
             }

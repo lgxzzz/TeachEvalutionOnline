@@ -15,7 +15,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //数据库名称
     public static final String DB_NAME = "database.db";
     //数据库版本号
-    public static int DB_VERSION = 11;
+    public static int DB_VERSION = 14;
     //学生表
     public static final String TAB_STUDENT = "student";
     //老师表
@@ -125,6 +125,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                 "tch_name varchar(60), " +
                 "course_name varchar(60), " +
                 "eva_score varchar(60), " +
+                "eva_time varchar(60), " +
                 "content varchar(60))");
     }
 

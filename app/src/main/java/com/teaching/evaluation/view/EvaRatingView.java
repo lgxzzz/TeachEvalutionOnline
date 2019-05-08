@@ -21,6 +21,8 @@ public class EvaRatingView extends LinearLayout{
     ProgressBar mProgressBarTwo;
     ProgressBar mProgressBarOne;
 
+    int[] mRatingNumber = new int[]{0,0,0,0,0};
+
     public EvaRatingView(Context context) {
         super(context);
     }
@@ -33,6 +35,20 @@ public class EvaRatingView extends LinearLayout{
 
     public EvaRatingView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    public void setParams(int count,int[] mRating){
+       mRatingNumber = mRating;
+       mProgressBarFive.setMax(count);
+       mProgressBarFour.setMax(count);
+       mProgressBarThree.setMax(count);
+       mProgressBarTwo.setMax(count);
+       mProgressBarOne.setMax(count);
+       mProgressBarFive.setProgress(mRatingNumber[4]);
+       mProgressBarFour.setProgress(mRatingNumber[3]);
+       mProgressBarThree.setProgress(mRatingNumber[2]);
+       mProgressBarTwo.setProgress(mRatingNumber[1]);
+       mProgressBarOne.setProgress(mRatingNumber[0]);
     }
 
     public void initView(){

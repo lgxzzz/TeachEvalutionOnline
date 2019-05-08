@@ -96,7 +96,7 @@ public class CourseFragment extends Fragment {
             @Override
             public void run() {
                 mHandler.postDelayed(this,5000);
-                table.addData(students,true);
+                table.addData(students,false);
             }
         },5000);
         return view;

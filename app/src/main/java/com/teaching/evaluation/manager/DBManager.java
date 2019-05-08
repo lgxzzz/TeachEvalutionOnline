@@ -154,11 +154,15 @@ public class DBManager {
             String course_name = cursor.getString(cursor.getColumnIndex("course_name"));
             String tch_name = cursor.getString(cursor.getColumnIndex("tch_name"));
             String content = cursor.getString(cursor.getColumnIndex("content"));
+            String course_time = cursor.getString(cursor.getColumnIndex("eva_time"));
+            String eva_score = cursor.getString(cursor.getColumnIndex("eva_score"));
             Evaluation evaluation = new Evaluation();
             evaluation.setContent(content);
             evaluation.setCourse_name(course_name);
             evaluation.setUser_number(user_number);
             evaluation.setTch_name(tch_name);
+            evaluation.setCourse_time(course_time);
+            evaluation.setEva_score(eva_score);
             evaluations.add(evaluation);
         }
         db.close();
@@ -174,6 +178,7 @@ public class DBManager {
         contentValues.put("tch_name",evaluation.getTch_name());
         contentValues.put("content",evaluation.getContent());
         contentValues.put("eva_score",evaluation.getEva_score());
+        contentValues.put("eva_time",evaluation.getCourse_time());
         long x = db.insert(SQLiteDbHelper.TAB_EVALUATE,null,contentValues);
     }
 
