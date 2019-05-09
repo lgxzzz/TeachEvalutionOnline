@@ -54,10 +54,12 @@ public class DBManager {
             String name = cursor.getString(cursor.getColumnIndex("stu_name"));
             String number = cursor.getString(cursor.getColumnIndex("stu_number"));
             int age = cursor.getInt(cursor.getColumnIndex("stu_age"));
+            String college_name = cursor.getString(cursor.getColumnIndex("college_name"));
             Student student = new Student();
             student.setName(name);
             student.setNumber(number);
             student.setAge(age);
+            student.setCollege_name(college_name);
             students.add(student);
         }
         db.close();

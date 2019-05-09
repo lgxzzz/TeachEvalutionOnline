@@ -8,6 +8,15 @@ public class Student {
     public String name;
     public String number;
     public int age;
+    public String college_name;
+
+    public String getCollege_name() {
+        return college_name;
+    }
+
+    public void setCollege_name(String college_name) {
+        this.college_name = college_name;
+    }
 
     public String getName() {
         return name;

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.manager.LoginManager;
+import com.teaching.evaluation.view.MyInfoDialog;
 
 
 /**
@@ -39,6 +40,14 @@ public class MyFragment extends Fragment {
     private TextView mUserName;
     private LinearLayout mEditCourseBtn;
     private LinearLayout mInsertCourseBtn;
+
+    private Button mMyInfo;
+    private Button mMyStudy;
+    private Button mDaily;
+    private Button mCalculator;
+    private Button mHelp;
+    private Button mInserCourse;
+    private Button mEditCourse;
 
     private Button mExApp;
 
@@ -82,19 +91,41 @@ public class MyFragment extends Fragment {
         mUserName = (TextView) view.findViewById(R.id.user_name);
         mEditCourseBtn = (LinearLayout)view.findViewById(R.id.edit_cousr_layout);
         mInsertCourseBtn = (LinearLayout)view.findViewById(R.id.insert_cousr_layout);
+        mExApp = (Button)view.findViewById(R.id.exit_app_btn);
+        mMyInfo = (Button)view.findViewById(R.id.my_info);
+        mMyStudy = (Button)view.findViewById(R.id.my_study);
+        mDaily = (Button)view.findViewById(R.id.my_daily);
+        mCalculator = (Button)view.findViewById(R.id.my_calculator);
+        mHelp = (Button)view.findViewById(R.id.my_help);
+        mInserCourse = (Button)view.findViewById(R.id.insert_course);
+        mEditCourse = (Button)view.findViewById(R.id.edit_course);
+
         User user = LoginManager.getInstance(getContext()).getUser();
+
         mUserName.setText(user.getName());
-        if (user.getRole().equals("老师")){
+
+        if (user.getRole().equals("老师"))
+        {
             mEditCourseBtn.setVisibility(View.VISIBLE);
             mInsertCourseBtn.setVisibility(View.VISIBLE);
         }
-        mExApp = (Button)view.findViewById(R.id.exit_app_btn);
+
+        mMyInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyInfoDialog dialog = new MyInfoDialog(getContext(),R.layout.my_info,true,true);
+                dialog.show();
+            }
+        });
+
         mExApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LoginManager.getInstance(getContext()).logout();
+                getActivity().finish();
             }
         });
+
         return view;
     }
 

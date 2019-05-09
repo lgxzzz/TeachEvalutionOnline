@@ -68,6 +68,7 @@
             android:gravity="center"
             >
             <Button
+                android:id="@+id/my_info"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/person"
@@ -92,6 +93,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/study"
+                android:id="@+id/my_study"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -110,6 +112,7 @@
             android:gravity="center"
             >
             <Button
+                android:id="@+id/my_daily"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/write"
@@ -141,6 +144,7 @@
             >
 
             <Button
+                android:id="@+id/my_calculator"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@drawable/calculator" />
@@ -161,6 +165,7 @@
             android:gravity="center"
             >
             <Button
+                android:id="@+id/my_help"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/help"
@@ -184,6 +189,7 @@
             android:visibility="invisible"
             >
             <Button
+                android:id="@+id/insert_course"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/insert_course"
@@ -217,6 +223,7 @@
             android:visibility="invisible"
             >
             <Button
+                android:id="@+id/edit_course"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@drawable/edit_course"
