@@ -14,7 +14,13 @@ import android.widget.TextView;
 
 import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.manager.LoginManager;
+import com.teaching.evaluation.view.CaluDialog;
+import com.teaching.evaluation.view.DaliyDialog;
+import com.teaching.evaluation.view.EditCourseDialog;
+import com.teaching.evaluation.view.HelpDialog;
+import com.teaching.evaluation.view.InsertCourseDialog;
 import com.teaching.evaluation.view.MyInfoDialog;
+import com.teaching.evaluation.view.StudyDialog;
 
 
 /**
@@ -118,6 +124,52 @@ public class MyFragment extends Fragment {
             }
         });
 
+        mMyStudy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                StudyDialog dialog = new StudyDialog(getContext(),R.layout.activity_guide,true,true);
+                dialog.show();
+            }
+        });
+
+        mDaily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DaliyDialog dialog = new DaliyDialog(getContext(),R.layout.activity_guide,true,true);
+                dialog.show();
+            }
+        });
+
+        mCalculator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CaluDialog dialog = new CaluDialog(getContext(),R.layout.activity_guide,true,true);
+                dialog.show();
+            }
+        });
+        mHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HelpDialog dialog = new HelpDialog(getContext(),R.layout.activity_guide,true,true);
+                dialog.show();
+            }
+        });
+
+        mInserCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InsertCourseDialog dialog = new InsertCourseDialog(getContext(),R.layout.activity_guide,true,true);
+                dialog.show();
+            }
+        });
+
+        mEditCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditCourseDialog dialog = new EditCourseDialog(getContext(),R.layout.activity_guide,true,true);
+                dialog.show();
+            }
+        });
         mExApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
