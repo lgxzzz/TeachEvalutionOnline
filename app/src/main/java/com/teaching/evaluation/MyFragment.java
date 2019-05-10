@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.teaching.evaluation.bean.User;
@@ -18,7 +17,7 @@ import com.teaching.evaluation.view.CaluDialog;
 import com.teaching.evaluation.view.DaliyDialog;
 import com.teaching.evaluation.view.EditCourseDialog;
 import com.teaching.evaluation.view.HelpDialog;
-import com.teaching.evaluation.view.InsertCourseDialog;
+import com.teaching.evaluation.view.OpreateCourseDialog;
 import com.teaching.evaluation.view.MyInfoDialog;
 import com.teaching.evaluation.view.StudyDialog;
 
@@ -158,7 +157,7 @@ public class MyFragment extends Fragment {
         mInserCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InsertCourseDialog dialog = new InsertCourseDialog(getContext(),R.layout.activity_guide,true,true);
+                OpreateCourseDialog dialog = new OpreateCourseDialog(getContext(),"insert",R.layout.insert_course,true,true);
                 dialog.show();
             }
         });
@@ -166,7 +165,7 @@ public class MyFragment extends Fragment {
         mEditCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditCourseDialog dialog = new EditCourseDialog(getContext(),R.layout.activity_guide,true,true);
+                OpreateCourseDialog dialog = new OpreateCourseDialog(getContext(),"edit",R.layout.insert_course,true,true);
                 dialog.show();
             }
         });
