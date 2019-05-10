@@ -3,6 +3,7 @@ package com.teaching.evaluation.view;
 
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
@@ -52,13 +53,14 @@ public class OpreateCourseDialog extends Dialog {
     private String mDescribe;
 
     private String opt="insert";
-
+    private String tch_name;
     private Button mSureBtn;
     private Button mCancelBtn;
 
     private ImageView mImg;
 
     List<Course> courses = new ArrayList<>();
+    Course course;
 
     public OpreateCourseDialog(Context context, String opt,int layoutid, boolean isCancelable, boolean isBackCancelable){
         super(context, R.style.MyDialog);
@@ -266,7 +268,13 @@ public class OpreateCourseDialog extends Dialog {
         mCourseSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+                course = courses.get(i);
+                mEditCourseName.setText(course.getName());
+                mEditScore.setText(course.getCredit());
+                mEditAchPoint.setText(course.getAch_point());
+                mEditHour.setText(course.getHour());
+                mEditPlace.setText(course.getPlace());
+                mEditTime.setText(course.getTime());
             }
 
             @Override
@@ -276,11 +284,31 @@ public class OpreateCourseDialog extends Dialog {
         });
     }
 
-    public void insertCourse(){
+    public void setParams(String tch_name){
+        this.tch_name = tch_name;
+    }
 
+    public void insertCourse(){
+        ContentValues values = new ContentValues();
+        values.put("course_name",mName);
+        values.put("course_credit",mScore);
+        values.put("course_hour",mHour);
+        values.put("course_time",mTime);
+        values.put("ach_point",mAchPoint);
+        values.put("place",mPlace);
+        values.put("tch_name",tch_name);
+        DBManager.getInstance(getContext()).insertCourse(values);
     }
 
     public void editCourse(){
-
+        ContentValues values = new ContentValues();
+        values.put("course_name",mName);
+        values.put("course_credit",mScore);
+        values.put("course_hour",mHour);
+        values.put("course_time",mTime);
+        values.put("ach_point",mAchPoint);
+        values.put("place",mPlace);
+        values.put("tch_name",course.getTch_name());
+        DBManager.getInstance(getContext()).editCourse(course.getTch_name(),values);
     }
 }

@@ -133,6 +133,7 @@ public class DBManager {
             String ach_point = cursor.getString(cursor.getColumnIndex("ach_point"));
             String place = cursor.getString(cursor.getColumnIndex("place"));
             String tch_number = cursor.getString(cursor.getColumnIndex("tch_name"));
+            String time = cursor.getString(cursor.getColumnIndex("course_time"));
             Course course = new Course();
             course.setName(course_name);
             course.setHour(course_hour);
@@ -140,6 +141,7 @@ public class DBManager {
             course.setPlace(place);
             course.setTch_name(tch_number);
             course.setCredit(course_credit);
+            course.setTime(time);
             courses.add(course);
         }
         db.close();
@@ -244,6 +246,27 @@ public class DBManager {
         listener.onFail(ErrorCode.ERROR_SEARCH);
     }
 
+    public int  editCourse(String tch_name,ContentValues values){
+        try{
+            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+            int code = db.update(SQLiteDbHelper.TAB_COURSE,values,"tch_name =?",new String[]{tch_name});
+            return code;
+        }catch (Exception e){
+
+        }
+        return -1;
+    }
+
+    public long  insertCourse(ContentValues values){
+        try{
+            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+            long code = db.insert(SQLiteDbHelper.TAB_COURSE,null,values);
+            return code;
+        }catch (Exception e){
+
+        }
+        return -1;
+    }
     public interface DBManagerListener{
         public void onSuccess(User user);
         public void onFail(int error);

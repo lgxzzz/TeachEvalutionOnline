@@ -19,6 +19,17 @@ public class Course {
     public String place;
     @SmartColumn(id = 6,name ="教师")
     public String tch_name;
+    @SmartColumn(id = 7,name ="上课时间")
+    public String time;
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public String getTch_name() {
         return tch_name;
     }

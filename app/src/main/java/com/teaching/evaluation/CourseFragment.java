@@ -89,8 +89,9 @@ public class CourseFragment extends Fragment {
         Column<String> courseAchPointColumn = new Column<>("绩效点","ach_point");
         Column<String> coursePlaceColumn = new Column<>("上课地点","place");
         Column<String> courseTchNameColumn = new Column<>("教师","tch_name");
+        Column<String> courseTimeColumn = new Column<>("上课时间","time");
 
-        final TableData<Course> tableData = new TableData<>("课程表",students,courseNameColumn,courseCreditColumn,courseHourColumn,courseAchPointColumn,coursePlaceColumn,courseTchNameColumn);
+        final TableData<Course> tableData = new TableData<>("课程表",students,courseNameColumn,courseCreditColumn,courseHourColumn,courseAchPointColumn,coursePlaceColumn,courseTchNameColumn,courseTimeColumn);
         table.setTableData(tableData);
         return view;
     }

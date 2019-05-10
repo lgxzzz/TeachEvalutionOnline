@@ -105,7 +105,7 @@ public class MyFragment extends Fragment {
         mInserCourse = (Button)view.findViewById(R.id.insert_course);
         mEditCourse = (Button)view.findViewById(R.id.edit_course);
 
-        User user = LoginManager.getInstance(getContext()).getUser();
+        final User user = LoginManager.getInstance(getContext()).getUser();
 
         mUserName.setText(user.getName());
 
@@ -158,6 +158,7 @@ public class MyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 OpreateCourseDialog dialog = new OpreateCourseDialog(getContext(),"insert",R.layout.insert_course,true,true);
+                dialog.setParams(user.getName());
                 dialog.show();
             }
         });
