@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="@drawable/app"
     >
 
     <TextView
@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="30dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
         >
         <EditText
             android:layout_width="match_parent"
@@ -42,8 +42,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
         >
          <EditText
              android:layout_width="match_parent"
@@ -60,8 +60,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="30dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
         android:layout_gravity="center"
         android:gravity="center"
         >
@@ -94,31 +94,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="用户登陆"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginLeft="70dp"
         android:textSize="22dp"
         android:id="@+id/login"
-
+        android:background="@drawable/btn_circle_shape_ios"
+        android:textColor="@android:color/white"
         />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="用户注册"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
         android:textSize="22dp"
         android:id="@+id/register"
+        android:textColor="@android:color/white"
+        android:background="@drawable/btn_circle_shape_ios"
         />
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="测试数据"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
         android:textSize="22dp"
         android:id="@+id/test_db"
+        android:textColor="@android:color/white"
+        android:background="@drawable/btn_circle_shape_ios"
         />
 </LinearLayout>

@@ -12,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.teaching.evaluation.adapter.VpAdapter;
+import com.teaching.evaluation.manager.LoginManager;
+import com.teaching.evaluation.view.BaseActivity;
 
 import java.util.ArrayList;
 
-public class GuidActivity extends Activity implements ViewPager.OnPageChangeListener{
+public class GuidActivity extends BaseActivity implements ViewPager.OnPageChangeListener{
 
     private ViewPager vPager;
     private VpAdapter vpAdapter;
@@ -29,9 +31,17 @@ public class GuidActivity extends Activity implements ViewPager.OnPageChangeList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
-        initView();
-        initImages();
-        initDots();
+        boolean isLogin = LoginManager.getInstance(getBaseContext()).isLogin();
+        if (isLogin)
+        {
+            Intent toMainActivity = new Intent(GuidActivity.this, LoginActivity.class);//跳转到主界面
+            startActivity(toMainActivity);
+        }else{
+            initView();
+            initImages();
+            initDots();
+        }
+
     }
 
     @Override

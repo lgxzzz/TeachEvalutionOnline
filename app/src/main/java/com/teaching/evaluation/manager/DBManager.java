@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.teaching.evaluation.bean.College;
 import com.teaching.evaluation.bean.Course;
+import com.teaching.evaluation.bean.Diary;
 import com.teaching.evaluation.bean.Evaluation;
+import com.teaching.evaluation.bean.Score;
 import com.teaching.evaluation.bean.Student;
 import com.teaching.evaluation.bean.Teacher;
 import com.teaching.evaluation.bean.User;
@@ -171,6 +173,87 @@ public class DBManager {
         }
         db.close();
         return evaluations;
+    }
+
+    //所有得分表
+    public List<Score> queryScores(String[] columns, String selection, String[]  selectionArgs, String groupBy, String having, String  orderBy){
+        List<Score> Scores = new ArrayList<>();
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        Cursor cursor = db.query(SQLiteDbHelper.TAB_SCORE,columns,selection,selectionArgs,groupBy,having,orderBy);
+        while (cursor.moveToNext()){
+            String course_name = cursor.getString(cursor.getColumnIndex("course_name"));
+            String tch_name = cursor.getString(cursor.getColumnIndex("tch_name"));
+            String stu_number = cursor.getString(cursor.getColumnIndex("stu_number"));
+            String year = cursor.getString(cursor.getColumnIndex("year"));
+            String scor = cursor.getString(cursor.getColumnIndex("score"));
+            Score score = new Score();
+            score.setCourse_name(course_name);
+            score.setTch_name(tch_name);
+            score.setStu_number(stu_number);
+            score.setYear(year);
+            score.setScore(scor);
+            Scores.add(score);
+        }
+        db.close();
+        return Scores;
+    }
+
+    //所有日志
+    public List<Diary> queryDiarys(String[] columns, String selection, String[]  selectionArgs, String groupBy, String having, String  orderBy){
+        List<Diary> diaries = new ArrayList<>();
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        Cursor cursor = db.query(SQLiteDbHelper.TAB_DIARY,columns,selection,selectionArgs,groupBy,having,orderBy);
+        while (cursor.moveToNext()){
+            String user_number = cursor.getString(cursor.getColumnIndex("user_number"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            String content = cursor.getString(cursor.getColumnIndex("content"));
+            String id = cursor.getString(cursor.getColumnIndex("id"));
+
+            Diary diary = new Diary();
+            diary.setUser_number(user_number);
+            diary.setTime(time);
+            diary.setTitle(title);
+            diary.setContent(content);
+            diary.setId(id);
+            diaries.add(diary);
+        }
+        db.close();
+        return diaries;
+    }
+
+    //增加日志
+    public long insertDiary(ContentValues values){
+        try{
+            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+            long code = db.insert(SQLiteDbHelper.TAB_DIARY,null,values);
+            return code;
+        }catch (Exception e){
+
+        }
+        return -1;
+    }
+    //修改日志
+    public int  editDiary(String diaryID,ContentValues values){
+        try{
+            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+            int code = db.update(SQLiteDbHelper.TAB_DIARY,values,"id =?",new String[]{diaryID});
+            return code;
+        }catch (Exception e){
+
+        }
+        return -1;
+    }
+    //删除日志
+    public int  deleteDiary(String diaryID){
+        try{
+            SQLiteDatabase db = mDbHelper.getWritableDatabase();
+            int code = db.delete(SQLiteDbHelper.TAB_DIARY,"id =?",new String[]{diaryID});
+            return code;
+        }catch (Exception e){
+
+        }
+        return -1;
     }
 
     //添加评论记录

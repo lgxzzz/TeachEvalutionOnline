@@ -7,5 +7,6 @@
         <item>学院</item>
         <item>课程</item>
         <item>评价</item>
+        <item>得分</item>
     </string-array>
 </resources>

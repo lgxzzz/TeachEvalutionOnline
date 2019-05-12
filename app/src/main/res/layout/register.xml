@@ -118,6 +118,7 @@
         android:text="注册"
         android:layout_margin="30dp"
         android:id="@+id/reg_sure"
-
+        android:background="@drawable/btn_circle_shape_ios"
+        android:textColor="@android:color/white"
         />
 </LinearLayout>

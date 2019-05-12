@@ -39,7 +39,7 @@ public class DaliyDialog extends Dialog {
         this.iscancelable = isCancelable;
         this.isBackCancelable = isBackCancelable;
 
-        initView();
+//        initView();
     }
 
     @Override

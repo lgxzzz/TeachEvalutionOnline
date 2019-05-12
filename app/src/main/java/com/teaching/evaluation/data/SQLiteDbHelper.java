@@ -15,7 +15,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //数据库名称
     public static final String DB_NAME = "database.db";
     //数据库版本号
-    public static int DB_VERSION = 15;
+    public static int DB_VERSION = 25;
     //学生表
     public static final String TAB_STUDENT = "student";
     //老师表
@@ -32,6 +32,8 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     public static final String TAB_SCORE = "score";
     //专业表
     public static final String TAB_MAJOR = "major";
+    //日志表
+    public static final String TAB_DIARY = "diary";
 
     public SQLiteDbHelper(Context context){
         super(context,DB_NAME,null,DB_VERSION);
@@ -46,7 +48,8 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
         createTableCollege(db);
         createTableCourse(db);
         createTableEvaluate(db);
-
+        createTableScore(db);
+        createTableDiary(db);
     }
 
     @Override
@@ -57,6 +60,8 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TAB_COLLEGE);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_COURSE);
         db.execSQL("DROP TABLE IF EXISTS "+TAB_EVALUATE);
+        db.execSQL("DROP TABLE IF EXISTS "+TAB_SCORE);
+        db.execSQL("DROP TABLE IF EXISTS "+TAB_DIARY);
 //        db.execSQL("DROP TABLE IF EXISTS "+TAB_MAJOR);
         onCreate(db);
     }
@@ -129,6 +134,26 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                 "content varchar(60))");
     }
 
+    //创建得分表
+    public void createTableScore(SQLiteDatabase db){
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_SCORE +
+                "(id integer primary key autoincrement, " +
+                "tch_name varchar(60), " +
+                "course_name varchar(60), " +
+                "score varchar(60), " +
+                "stu_number varchar(60), " +
+                "year varchar(60))");
+    }
+
+    //创建日志表
+    public void createTableDiary(SQLiteDatabase db){
+        db.execSQL("CREATE TABLE IF NOT EXISTS "+TAB_DIARY +
+                "(id integer primary key autoincrement, " +
+                "user_number varchar(60), " +
+                "time varchar(60), " +
+                "title varchar(60), " +
+                "content varchar(60))");
+    }
     //------------------------------初始化数据--------------------------------------------------//
     public void initData(){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -172,6 +197,20 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             contentValues.put("place",DataSourse.PLACES[new Random().nextInt(DataSourse.PLACES.length-1)]);
             contentValues.put("tch_name",DataSourse.TEACHER[new Random().nextInt(DataSourse.TEACHER.length-1)]);
             db.insert(TAB_COURSE,null,contentValues);
+
+
+            //给每个学生导入得分数据
+            for (int j=0;j<DataSourse.COURSE.length;j++){
+
+                ContentValues values = new ContentValues();
+                values.put("tch_name",contentValues.getAsString("tch_name"));
+                values.put("course_name",contentValues.getAsString("course_name"));
+                values.put("score",new Random().nextInt(100));
+                values.put("stu_number","1000"+j);
+                values.put("year",DataSourse.YEARS[new Random().nextInt(DataSourse.YEARS.length-1)]);
+                db.insert(TAB_SCORE,null,values);
+            }
+
         }
 
         //导入专业数据

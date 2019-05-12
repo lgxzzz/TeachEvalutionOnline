@@ -14,12 +14,13 @@ import com.teaching.evaluation.bean.Course;
 import com.teaching.evaluation.bean.Evaluation;
 import com.teaching.evaluation.manager.DBManager;
 import com.teaching.evaluation.manager.LoginManager;
+import com.teaching.evaluation.view.BaseActivity;
 import com.teaching.evaluation.view.EditEvaluaDialog;
 import com.teaching.evaluation.view.EvaRatingView;
 
 import java.util.List;
 
-public class EvaluationActivity extends Activity {
+public class EvaluationActivity extends BaseActivity {
 
     Button mEvaEditBtn;
     EditEvaluaDialog mEditEvaDialog;

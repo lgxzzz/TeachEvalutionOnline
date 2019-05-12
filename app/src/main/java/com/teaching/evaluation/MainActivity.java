@@ -76,6 +76,14 @@ public class MainActivity extends FragmentActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //退出所有activity，简单处理exit程序
+        //杀死该应用进程
+        TeachingEvaApplication.getInstance().exit();
+    }
 }
 
 

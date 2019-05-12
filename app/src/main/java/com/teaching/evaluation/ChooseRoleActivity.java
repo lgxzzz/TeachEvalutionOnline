@@ -20,6 +20,7 @@ public class ChooseRoleActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_role);
         initView();
+        TeachingEvaApplication.getInstance().addActivity(this);
     }
 
     public void initView(){

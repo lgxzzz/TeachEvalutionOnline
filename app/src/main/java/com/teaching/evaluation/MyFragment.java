@@ -1,6 +1,7 @@
 package com.teaching.evaluation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,8 +15,6 @@ import android.widget.TextView;
 import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.manager.LoginManager;
 import com.teaching.evaluation.view.CaluDialog;
-import com.teaching.evaluation.view.DaliyDialog;
-import com.teaching.evaluation.view.EditCourseDialog;
 import com.teaching.evaluation.view.HelpDialog;
 import com.teaching.evaluation.view.OpreateCourseDialog;
 import com.teaching.evaluation.view.MyInfoDialog;
@@ -126,7 +125,7 @@ public class MyFragment extends Fragment {
         mMyStudy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StudyDialog dialog = new StudyDialog(getContext(),R.layout.activity_guide,true,true);
+                StudyDialog dialog = new StudyDialog(getContext(),R.layout.my_study,true,true);
                 dialog.show();
             }
         });
@@ -134,22 +133,23 @@ public class MyFragment extends Fragment {
         mDaily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DaliyDialog dialog = new DaliyDialog(getContext(),R.layout.activity_guide,true,true);
-                dialog.show();
+                Intent mIntent = new Intent();
+                mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.DiaryActivity");
+                startActivity(mIntent);
             }
         });
 
         mCalculator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CaluDialog dialog = new CaluDialog(getContext(),R.layout.activity_guide,true,true);
+                CaluDialog dialog = new CaluDialog(getContext(),R.layout.calcuation,true,true);
                 dialog.show();
             }
         });
         mHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HelpDialog dialog = new HelpDialog(getContext(),R.layout.activity_guide,true,true);
+                HelpDialog dialog = new HelpDialog(getContext(),R.layout.my_help,true,true);
                 dialog.show();
             }
         });
@@ -157,7 +157,7 @@ public class MyFragment extends Fragment {
         mInserCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpreateCourseDialog dialog = new OpreateCourseDialog(getContext(),"insert",R.layout.insert_course,true,true);
+                OpreateCourseDialog dialog = new OpreateCourseDialog(getContext(),"insert",R.layout.operate_course,true,true);
                 dialog.setParams(user.getName());
                 dialog.show();
             }
@@ -166,7 +166,7 @@ public class MyFragment extends Fragment {
         mEditCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                OpreateCourseDialog dialog = new OpreateCourseDialog(getContext(),"edit",R.layout.insert_course,true,true);
+                OpreateCourseDialog dialog = new OpreateCourseDialog(getContext(),"edit",R.layout.operate_course,true,true);
                 dialog.show();
             }
         });

@@ -19,8 +19,9 @@ import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.constant.ErrorCode;
 import com.teaching.evaluation.constant.UserConstant;
 import com.teaching.evaluation.manager.LoginManager;
+import com.teaching.evaluation.view.BaseActivity;
 
-public class LoginActivity extends Activity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     EditText mEditTextName;//输入的名称
     EditText mEditTextPwd;//输入的密码
@@ -134,6 +135,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         mLoginManager.doLogin(user, new LoginManager.LoginListenter() {
             @Override
             public void onSuccess() {
+                LoginManager.getInstance(LoginActivity.this).setIsLogin(true);
                 Intent mIntent = new Intent();
                 mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.MainActivity");
                 startActivity(mIntent);
@@ -176,6 +178,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         }
     }
 
-
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initView();
+    }
 }

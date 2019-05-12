@@ -16,8 +16,10 @@ import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.constant.ErrorCode;
 import com.teaching.evaluation.constant.UserConstant;
 import com.teaching.evaluation.manager.DBManager;
+import com.teaching.evaluation.manager.LoginManager;
+import com.teaching.evaluation.view.BaseActivity;
 
-public class RegisterActivity extends Activity{
+public class RegisterActivity extends BaseActivity {
     private TextView mRegNumberTv;
 
     private Button mRegSure;
@@ -160,6 +162,7 @@ public class RegisterActivity extends Activity{
                 DBManager.getInstance(RegisterActivity.this).addUser(user, new DBManager.DBManagerListener() {
                     @Override
                     public void onSuccess(User user) {
+                        LoginManager.getInstance(getBaseContext()).setUser(user);
                         Intent mIntent = new Intent();
                         mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.MainActivity");
                         startActivity(mIntent);

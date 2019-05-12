@@ -58,7 +58,8 @@ public class LoginManager {
     //登出
     public void logout(){
         mLoginUser = null;
-
+        savePWd(true,"","");
+        setIsLogin(false);
     }
 
     //是否记住密码
@@ -81,6 +82,17 @@ public class LoginManager {
         return isRemind;
     }
 
+    public boolean isLogin(){
+        boolean isLogin = sp.getBoolean("isLogin",false);
+        return isLogin;
+    }
+
+    public void setIsLogin(boolean isLogin){
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("isLogin",isLogin);
+        editor.commit();
+    }
+
     public String getPreName(){
         return sp.getString("name","");
     }
@@ -93,7 +105,9 @@ public class LoginManager {
         return mLoginUser;
     }
 
-
+    public void setUser(User user){
+        this.mLoginUser = user;
+    }
 
     public interface LoginListenter{
         public void onSuccess();

@@ -5,6 +5,7 @@ package com.teaching.evaluation.view;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -254,20 +255,22 @@ public class OpreateCourseDialog extends Dialog {
         mCourseSp.setVisibility(View.VISIBLE);
         mSureBtn.setText("修改");
 
-        String[] spinnerItems = new String[courses.size()-1];
-        for (int i= 0;i<courses.size()-1;i++){
+        String[] spinnerItems = new String[courses.size()];
+        for (int i= 0;i<courses.size();i++){
             spinnerItems[i]=courses.get(i).getName();
         }
         //简单的string数组适配器：样式res，数组
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_item, spinnerItems);
         //下拉的样式res
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
         //绑定 Adapter到控件
         mCourseSp.setAdapter(spinnerAdapter);
         mCourseSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView tv = (TextView) view;
+                tv.setTextColor(Color.BLACK);
                 course = courses.get(i);
                 mEditCourseName.setText(course.getName());
                 mEditScore.setText(course.getCredit());

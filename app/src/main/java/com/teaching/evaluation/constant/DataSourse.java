@@ -3,11 +3,12 @@ package com.teaching.evaluation.constant;
 public class DataSourse {
 
     public static String[] STUDENT = new String[]{
+            "admin",
             "张三",
             "李四",
             "王五",
             "赵公子",
-            "admin"
+
     };
 
     public static String[] TEACHER = new String[]{
@@ -24,7 +25,7 @@ public class DataSourse {
             "王安石",
     };
 
-    public static String[] TIME = new String[]{
+    public static String[] YEARS = new String[]{
             "2015",
             "2016",
             "2017",

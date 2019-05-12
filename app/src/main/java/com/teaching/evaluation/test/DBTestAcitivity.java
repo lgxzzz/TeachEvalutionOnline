@@ -21,6 +21,7 @@ import com.teaching.evaluation.RegisterActivity;
 import com.teaching.evaluation.bean.College;
 import com.teaching.evaluation.bean.Course;
 import com.teaching.evaluation.bean.Evaluation;
+import com.teaching.evaluation.bean.Score;
 import com.teaching.evaluation.bean.Student;
 import com.teaching.evaluation.bean.Teacher;
 import com.teaching.evaluation.bean.User;
@@ -114,6 +115,12 @@ public class DBTestAcitivity extends Activity {
             evaluations = dbManager.queryEvaluations(null,null,null,null,null,"tch_name");
             for (int i= 0;i<evaluations.size();i++){
                 mList.add(evaluations.get(i).toString());
+            }
+        }else if(table.equals("得分")){
+            List<Score> scores;
+            scores = dbManager.queryScores(null,null,null,null,null,"tch_name");
+            for (int i= 0;i<scores.size();i++){
+                mList.add(scores.get(i).toString());
             }
         }
 

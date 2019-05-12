@@ -12,6 +12,8 @@
         android:text="我是学生"
         android:layout_margin="30dp"
         android:id="@+id/register_stu"
+        android:background="@drawable/btn_circle_shape_ios"
+        android:textColor="@android:color/white"
 
         />
      <Button
@@ -21,5 +23,7 @@
          android:text="我是老师"
          android:layout_margin="30dp"
          android:id="@+id/register_tch"
+         android:background="@drawable/btn_circle_shape_ios"
+         android:textColor="@android:color/white"
          />
 </LinearLayout>

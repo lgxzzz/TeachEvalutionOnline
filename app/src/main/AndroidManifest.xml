@@ -21,6 +21,7 @@
         <activity android:name=".test.DBTestAcitivity"></activity>
         <activity android:name=".EvaluationActivity"></activity>
         <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".DiaryActivity"></activity>
     </application>
 
 </manifest>
