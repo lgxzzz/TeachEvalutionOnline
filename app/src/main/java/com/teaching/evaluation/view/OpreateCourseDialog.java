@@ -261,9 +261,9 @@ public class OpreateCourseDialog extends Dialog {
         }
         //简单的string数组适配器：样式res，数组
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_item, spinnerItems);
+                R.layout.simple_spinner_item, spinnerItems);
         //下拉的样式res
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_expandable_list_item_1);
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_expandable_list_item_1);
         //绑定 Adapter到控件
         mCourseSp.setAdapter(spinnerAdapter);
         mCourseSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -312,6 +312,6 @@ public class OpreateCourseDialog extends Dialog {
         values.put("ach_point",mAchPoint);
         values.put("place",mPlace);
         values.put("tch_name",course.getTch_name());
-        DBManager.getInstance(getContext()).editCourse(course.getTch_name(),values);
+        DBManager.getInstance(getContext()).editCourse(course.getTch_name(),course.getName(),values);
     }
 }

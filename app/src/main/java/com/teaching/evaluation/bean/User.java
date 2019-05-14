@@ -9,6 +9,33 @@ public class User {
     private String pwd;
     private String number;
     private String role;
+    private String age;
+    private String sex;
+    private String college_name;
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getCollege_name() {
+        return college_name;
+    }
+
+    public void setCollege_name(String college_name) {
+        this.college_name = college_name;
+    }
 
     public String getNumber() {
         return number;

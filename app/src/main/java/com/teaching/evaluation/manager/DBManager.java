@@ -55,7 +55,7 @@ public class DBManager {
         while (cursor.moveToNext()){
             String name = cursor.getString(cursor.getColumnIndex("stu_name"));
             String number = cursor.getString(cursor.getColumnIndex("stu_number"));
-            int age = cursor.getInt(cursor.getColumnIndex("stu_age"));
+            int age = cursor.getInt(cursor.getColumnIndex("age"));
             String college_name = cursor.getString(cursor.getColumnIndex("college_name"));
             Student student = new Student();
             student.setName(name);
@@ -295,12 +295,19 @@ public class DBManager {
             listener.onFail(ErrorCode.ERROR_NOT_EXIST_PERSON);
             return;
         }
+        String college_name = cursor1.getString(cursor1.getColumnIndex("college_name"));
+        String age = cursor1.getString(cursor1.getColumnIndex("age"));
+        String sex = cursor1.getString(cursor1.getColumnIndex("sex"));
+
         //插入用户表中
         ContentValues contentValues = new ContentValues();
         contentValues.put("user_name",user.getName());
         contentValues.put("user_pwd",user.getPwd());
         contentValues.put("user_role",user.getRole());
         contentValues.put("user_number",user.getNumber());
+        contentValues.put("age",age);
+        contentValues.put("sex",sex);
+        contentValues.put("college_name",college_name);
         db.insert(SQLiteDbHelper.TAB_USER,null,contentValues);
         db.close();
         listener.onSuccess(user);
@@ -314,8 +321,13 @@ public class DBManager {
             if (cursor.moveToFirst()){
                 String user_number = cursor.getString(cursor.getColumnIndex("user_number"));
                 String user_role = cursor.getString(cursor.getColumnIndex("user_role"));
+                int age = cursor.getInt(cursor.getColumnIndex("age"));
+                String sex = cursor.getString(cursor.getColumnIndex("sex"));
+                String college_name = cursor.getString(cursor.getColumnIndex("college_name"));
                 user.setRole(user_role);
                 user.setNumber(user_number);
+                user.setCollege_name(college_name);
+                user.setAge(age+"");
                 listener.onSuccess(user);
             }else{
                 listener.onFail(ErrorCode.ERROR_SEARCH);
@@ -329,10 +341,10 @@ public class DBManager {
         listener.onFail(ErrorCode.ERROR_SEARCH);
     }
 
-    public int  editCourse(String tch_name,ContentValues values){
+    public int  editCourse(String tch_name,String course_name,ContentValues values){
         try{
             SQLiteDatabase db = mDbHelper.getWritableDatabase();
-            int code = db.update(SQLiteDbHelper.TAB_COURSE,values,"tch_name =?",new String[]{tch_name});
+            int code = db.update(SQLiteDbHelper.TAB_COURSE,values,"tch_name =? and course_name =?",new String[]{tch_name,course_name});
             return code;
         }catch (Exception e){
 
@@ -350,6 +362,32 @@ public class DBManager {
         }
         return -1;
     }
+
+    public List<Course> queryCourseByKeyWord(String keyword){
+        List<Course> courses = new ArrayList<>();
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM course WHERE course_name LIKE '%" + keyword + "%'", null);
+        while (cursor.moveToNext()){
+            String course_name = cursor.getString(cursor.getColumnIndex("course_name"));
+            String course_hour = cursor.getString(cursor.getColumnIndex("course_hour"));
+            String course_credit = cursor.getString(cursor.getColumnIndex("course_credit"));
+            String ach_point = cursor.getString(cursor.getColumnIndex("ach_point"));
+            String place = cursor.getString(cursor.getColumnIndex("place"));
+            String tch_number = cursor.getString(cursor.getColumnIndex("tch_name"));
+            String time = cursor.getString(cursor.getColumnIndex("course_time"));
+            Course course = new Course();
+            course.setName(course_name);
+            course.setHour(course_hour);
+            course.setAch_point(ach_point);
+            course.setPlace(place);
+            course.setTch_name(tch_number);
+            course.setCredit(course_credit);
+            course.setTime(time);
+            courses.add(course);
+        }
+        return courses;
+    };
+
     public interface DBManagerListener{
         public void onSuccess(User user);
         public void onFail(int error);

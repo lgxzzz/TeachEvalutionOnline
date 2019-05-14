@@ -15,7 +15,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //数据库名称
     public static final String DB_NAME = "database.db";
     //数据库版本号
-    public static int DB_VERSION = 25;
+    public static int DB_VERSION = 30;
     //学生表
     public static final String TAB_STUDENT = "student";
     //老师表
@@ -72,8 +72,8 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                 "(id integer primary key autoincrement, " +
                 "stu_name varchar(60), " +
                 "stu_number varchar(60), " +
-                "stu_age integer," +
-                "stu_sex integer, " +
+                "age integer," +
+                "sex integer, " +
                 "college_name varchar(60), " +
                 "marjor_name varchar(60)," +
                 "time varchar(60))");
@@ -85,8 +85,8 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                 "(id integer primary key autoincrement, " +
                 "tch_name varchar(60), " +
                 "tch_number varchar(60), " +
-                "tch_age integer," +
-                "tch_sex integer, " +
+                "age varchar(60)," +
+                "sex varchar(60), " +
                 "college_name varchar(60), " +
                 "time varchar(60))");
     }
@@ -99,6 +99,9 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                 "user_number varchar(60), " +
                 "user_role varchar(60), " +
                 "user_email varchar(60), " +
+                "age integer, " +
+                "sex integer, " +
+                "college_name varchar(60), " +
                 "user_pwd varchar(60))");
     }
 
@@ -162,8 +165,8 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             ContentValues contentValues = new ContentValues();
             contentValues.put("stu_name",DataSourse.STUDENT[i]);
             contentValues.put("stu_number","1000"+i);
-            contentValues.put("stu_age",new Random().nextInt(30));
-            contentValues.put("stu_sex",new Random().nextInt(1));
+            contentValues.put("age",new Random().nextInt(30));
+            contentValues.put("sex",new Random().nextInt(1));
             contentValues.put("college_name",DataSourse.COLLEGE[new Random().nextInt(DataSourse.COLLEGE.length-1)]);
             contentValues.put("marjor_name",DataSourse.MAJOR[new Random().nextInt(DataSourse.MAJOR.length-1)]);
             contentValues.put("time",System.currentTimeMillis());
@@ -174,8 +177,8 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             ContentValues contentValues = new ContentValues();
             contentValues.put("tch_name",DataSourse.TEACHER[i]);
             contentValues.put("tch_number","2000"+i);
-            contentValues.put("tch_age",new Random().nextInt(40));
-            contentValues.put("tch_sex",new Random().nextInt(1));
+            contentValues.put("age",new Random().nextInt(40));
+            contentValues.put("sex",new Random().nextInt(1));
             contentValues.put("college_name",DataSourse.COLLEGE[new Random().nextInt(DataSourse.COLLEGE.length-1)]);
             contentValues.put("time",System.currentTimeMillis());
             db.insert(TAB_TEACHER,null,contentValues);

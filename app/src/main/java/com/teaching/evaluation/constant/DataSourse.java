@@ -90,6 +90,8 @@ public class DataSourse {
             "东亚史前考古",
             "有机化学实验",
             "学术前沿专题",
+            "English",
+            "Math"
     };
 
     public static String[] PLACES = new String[]{

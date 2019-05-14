@@ -9,7 +9,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <EditText
-    android:id="@+id/alertDialog_et"
+        android:id="@+id/search_edit"
     android:background="@drawable/bg_edittext"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
@@ -22,7 +22,15 @@
         android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:hint="搜索" />
+    android:hint="搜索课程" />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/search_list"
+        android:visibility="gone"
+        >
+
+    </ListView>
     <com.teaching.evaluation.view.TreeListView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

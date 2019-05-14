@@ -8,14 +8,18 @@
         android:icon="@mipmap/ic_launcher"
         android:theme="@android:style/Theme.Black.NoTitleBar"
         >
-        <activity android:name=".GuidActivity">
+        <activity android:name=".GuidActivity"
+            android:windowSoftInputMode="adjustPan"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan"
+            ></activity>
         <activity android:name=".ChooseRoleActivity"></activity>
         <activity android:name=".RegisterActivity"></activity>
         <activity android:name=".test.DBTestAcitivity"></activity>

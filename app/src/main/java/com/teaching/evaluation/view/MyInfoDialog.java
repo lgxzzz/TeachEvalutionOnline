@@ -19,12 +19,14 @@ import android.widget.TextView;
 
 import com.teaching.evaluation.R;
 import com.teaching.evaluation.bean.Evaluation;
+import com.teaching.evaluation.bean.Student;
 import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.manager.DBManager;
 import com.teaching.evaluation.manager.LoginManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 public class MyInfoDialog extends Dialog {
@@ -77,6 +79,8 @@ public class MyInfoDialog extends Dialog {
 
         mName.setText(user.getName());
         mNumber.setText(user.getNumber());
+        mAge.setText(user.getAge());
+        mCollege.setText(user.getCollege_name());
 
 
     }

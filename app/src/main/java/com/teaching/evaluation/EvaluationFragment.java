@@ -1,14 +1,20 @@
 package com.teaching.evaluation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ListView;
 
 import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.core.TableConfig;
@@ -19,8 +25,11 @@ import com.bin.david.form.data.format.bg.BaseCellBackgroundFormat;
 import com.bin.david.form.data.format.bg.ICellBackgroundFormat;
 import com.bin.david.form.data.style.FontStyle;
 import com.bin.david.form.data.table.TableData;
+import com.teaching.evaluation.adapter.NodeAdapter;
 import com.teaching.evaluation.bean.Course;
 import com.teaching.evaluation.bean.Student;
+import com.teaching.evaluation.manager.DBManager;
+import com.teaching.evaluation.view.TreeListDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +55,8 @@ public class EvaluationFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-
+    private EditText mSearchEdit;
+    private ListView mSearchListView;
 
     public EvaluationFragment() {
         // Required empty public constructor
@@ -85,7 +95,56 @@ public class EvaluationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View  view= inflater.inflate(R.layout.fragment_evaluation, container, false);
+        mSearchEdit = (EditText) view.findViewById(R.id.search_edit);
+        mSearchListView = (ListView) view.findViewById(R.id.search_list);
 
+        mSearchEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                if (charSequence.length()==0){
+                    return;
+                }
+                final List<Course> courses = DBManager.getInstance(getContext()).queryCourseByKeyWord(charSequence.toString());
+
+                if (courses.size()==0){
+                    mSearchListView.setVisibility(View.GONE);
+                }else{
+                    mSearchListView.setVisibility(View.VISIBLE);
+                    List<String> mData = new ArrayList<>();
+                    for (int j=0;j<courses.size();j++){
+                        Course course = courses.get(j);
+                        mData.add(course.getName());
+                    }
+                    NodeAdapter adapter = new NodeAdapter(getContext(),mData);
+                    mSearchListView.setAdapter(adapter);
+                    mSearchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            mSearchListView.setVisibility(View.GONE);
+                            Course course = courses.get(i);
+                            Intent mIntent = new Intent();
+                            mIntent.putExtra("course_name",course.getName());
+                            mIntent.putExtra("tch_name",course.getTch_name());
+                            mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.EvaluationActivity");
+                            EvaluationFragment.this.getContext().startActivity(mIntent);
+                        }
+                    });
+                }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         return view;
     }
