@@ -14,7 +14,9 @@ import com.bin.david.form.core.SmartTable;
 import com.bin.david.form.data.column.Column;
 import com.bin.david.form.data.table.TableData;
 import com.teaching.evaluation.bean.Course;
+import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.manager.DBManager;
+import com.teaching.evaluation.manager.LoginManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,9 +80,12 @@ public class CourseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        User user = LoginManager.getInstance(getContext()).getUser();
+
         View view = inflater.inflate(R.layout.fragment_course, container, false);
         table = (SmartTable<Course>) view.findViewById(R.id.table);
-        final List<Course> students  = DBManager.getInstance(this.getContext()).queryCourse(null,null,null,null,null,null);
+        final List<Course> students  = DBManager.getInstance(this.getContext()).queryCourse(
+                null,"college_name =?",new String[]{user.getCollege_name()},null,null,null);
 
 
         Column<String> courseNameColumn = new Column<>("课程名称","name");

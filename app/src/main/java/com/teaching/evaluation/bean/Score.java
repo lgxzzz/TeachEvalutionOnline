@@ -59,6 +59,6 @@ public class Score {
     }
 
     public String toString(){
-        return tch_name+" "+course_name+" "+score+" "+year;
+        return tch_name+" "+course_name+" "+score+" "+stu_number;
     }
 }

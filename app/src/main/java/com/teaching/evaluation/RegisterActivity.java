@@ -50,7 +50,7 @@ public class RegisterActivity extends BaseActivity {
         mRegSure = (Button) findViewById(R.id.reg_sure);
 
         mRegNumberTv = (TextView) findViewById(R.id.reg_number_tv);
-        mRegNumberTv.setText(mCurrentRole==UserConstant.ROLE_STUDENT?"请输入学生编号":"请输入教师编号");
+        mRegNumberTv.setText(mCurrentRole==UserConstant.ROLE_STUDENT?"请输入学号:":"请输入编号:");
 
         mRegName = (EditText) findViewById(R.id.reg_name);
         mRegNumber = (EditText) findViewById(R.id.reg_number);

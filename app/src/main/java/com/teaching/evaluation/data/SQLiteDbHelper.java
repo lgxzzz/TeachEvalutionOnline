@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.teaching.evaluation.bean.Student;
 import com.teaching.evaluation.constant.DataSourse;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class SQLiteDbHelper extends SQLiteOpenHelper {
@@ -15,7 +17,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //数据库名称
     public static final String DB_NAME = "database.db";
     //数据库版本号
-    public static int DB_VERSION = 30;
+    public static int DB_VERSION = 40;
     //学生表
     public static final String TAB_STUDENT = "student";
     //老师表
@@ -122,6 +124,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
                 "course_time varchar(60), " +
                 "ach_point varchar(60), " +
                 "place varchar(60), " +
+                "college_name varchar(60),"+
                 "tch_name varchar(60))");
     }
 
@@ -160,18 +163,8 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     //------------------------------初始化数据--------------------------------------------------//
     public void initData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        //导入学生数据
-        for (int i= 0;i<DataSourse.STUDENT.length;i++){
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("stu_name",DataSourse.STUDENT[i]);
-            contentValues.put("stu_number","1000"+i);
-            contentValues.put("age",new Random().nextInt(30));
-            contentValues.put("sex",new Random().nextInt(1));
-            contentValues.put("college_name",DataSourse.COLLEGE[new Random().nextInt(DataSourse.COLLEGE.length-1)]);
-            contentValues.put("marjor_name",DataSourse.MAJOR[new Random().nextInt(DataSourse.MAJOR.length-1)]);
-            contentValues.put("time",System.currentTimeMillis());
-            db.insert(TAB_STUDENT,null,contentValues);
-        }
+
+        Map<String,String> teachers_map = new HashMap<>();
         //导入老师数据
         for (int i=0;i<DataSourse.TEACHER.length;i++){
             ContentValues contentValues = new ContentValues();
@@ -179,9 +172,26 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             contentValues.put("tch_number","2000"+i);
             contentValues.put("age",new Random().nextInt(40));
             contentValues.put("sex",new Random().nextInt(1));
-            contentValues.put("college_name",DataSourse.COLLEGE[new Random().nextInt(DataSourse.COLLEGE.length-1)]);
+            String college_name =
+                    DataSourse.COLLEGE[new Random().nextInt(DataSourse.COLLEGE.length-1)];
+            contentValues.put("college_name",college_name);
             contentValues.put("time",System.currentTimeMillis());
             db.insert(TAB_TEACHER,null,contentValues);
+            teachers_map.put(DataSourse.TEACHER[i],college_name);
+            //确保每个学生数据都有导师
+            if (i<DataSourse.STUDENT.length){
+                ContentValues contentValues1 = new ContentValues();
+                contentValues1.put("stu_name",DataSourse.STUDENT[i]);
+                contentValues1.put("stu_number","1000"+i);
+                contentValues1.put("age",new Random().nextInt(30));
+                contentValues1.put("sex",new Random().nextInt(1));
+                contentValues1.put("college_name",college_name);
+                contentValues1.put("marjor_name",DataSourse.MAJOR[new Random().nextInt(DataSourse.MAJOR.length-1)]);
+                contentValues1.put("time",System.currentTimeMillis());
+                db.insert(TAB_STUDENT,null,contentValues1);
+
+
+            }
         }
         //导入学院数据
         for (int i=0;i<DataSourse.COLLEGE.length;i++){
@@ -189,6 +199,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             contentValues.put("college_name",DataSourse.COLLEGE[i]);
             db.insert(TAB_COLLEGE,null,contentValues);
         }
+
         //导入课程数据
         for (int i =0;i<DataSourse.COURSE.length;i++){
             ContentValues contentValues = new ContentValues();
@@ -198,25 +209,35 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             contentValues.put("course_time",DataSourse.TIMES[new Random().nextInt(DataSourse.TIMES.length-1)]);
             contentValues.put("ach_point",0.5f+"");
             contentValues.put("place",DataSourse.PLACES[new Random().nextInt(DataSourse.PLACES.length-1)]);
-            contentValues.put("tch_name",DataSourse.TEACHER[new Random().nextInt(DataSourse.TEACHER.length-1)]);
+            //确保每个老师都有一个课程，方便演示
+            String tch_name = DataSourse.TEACHER[new Random().nextInt(DataSourse.TEACHER.length-1)];
+            if (i<DataSourse.TEACHER.length)
+            {
+                tch_name = DataSourse.TEACHER[i];
+                if (i==0)
+                {
+                    //只给admin学生导入部分课程分数
+                    ContentValues values = new ContentValues();
+                    values.put("tch_name",tch_name);
+                    values.put("course_name",contentValues.getAsString("course_name"));
+                    values.put("score",new Random().nextInt(100));
+                    values.put("stu_number","10000");
+                    values.put("year",DataSourse.YEARS[new Random().nextInt(DataSourse.YEARS.length-1)]);
+                    db.insert(TAB_SCORE,null,values);
+                }
+
+            }
+            String college_name = teachers_map.get(tch_name);
+            contentValues.put("tch_name",tch_name);
+            contentValues.put("college_name",college_name);
+
             db.insert(TAB_COURSE,null,contentValues);
 
 
-            //给每个学生导入得分数据
-            for (int j=0;j<DataSourse.COURSE.length;j++){
-
-                ContentValues values = new ContentValues();
-                values.put("tch_name",contentValues.getAsString("tch_name"));
-                values.put("course_name",contentValues.getAsString("course_name"));
-                values.put("score",new Random().nextInt(100));
-                values.put("stu_number","1000"+j);
-                values.put("year",DataSourse.YEARS[new Random().nextInt(DataSourse.YEARS.length-1)]);
-                db.insert(TAB_SCORE,null,values);
-            }
-
         }
 
-        //导入专业数据
+
+
         db.close();
     }
 }

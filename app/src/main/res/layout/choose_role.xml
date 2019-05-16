@@ -7,23 +7,25 @@
     >
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0.0dp"
         android:textSize="30dp"
         android:text="我是学生"
-        android:layout_margin="30dp"
+        android:layout_margin="50dp"
         android:id="@+id/register_stu"
         android:background="@drawable/btn_circle_shape_ios"
         android:textColor="@android:color/white"
+        android:layout_weight="1"
 
         />
      <Button
          android:layout_width="match_parent"
-         android:layout_height="wrap_content"
+         android:layout_height="0.0dp"
          android:textSize="30dp"
          android:text="我是老师"
-         android:layout_margin="30dp"
+         android:layout_margin="50dp"
          android:id="@+id/register_tch"
          android:background="@drawable/btn_circle_shape_ios"
          android:textColor="@android:color/white"
+         android:layout_weight="1"
          />
 </LinearLayout>

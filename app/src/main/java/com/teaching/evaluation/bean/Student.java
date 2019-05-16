@@ -43,6 +43,6 @@ public class Student {
     }
 
     public String toString(){
-        return name+" "+number+" "+age;
+        return name+" "+number+" "+college_name;
     }
 }

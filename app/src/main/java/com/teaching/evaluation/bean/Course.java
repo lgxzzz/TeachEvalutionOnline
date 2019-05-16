@@ -21,6 +21,16 @@ public class Course {
     public String tch_name;
     @SmartColumn(id = 7,name ="上课时间")
     public String time;
+    @SmartColumn(id = 8,name = "学院")
+    public String college_name;
+
+    public String getCollege_name() {
+        return college_name;
+    }
+
+    public void setCollege_name(String college_name) {
+        this.college_name = college_name;
+    }
 
     public String getTime() {
         return time;
@@ -81,6 +91,6 @@ public class Course {
 
 
     public String toString(){
-        return name +" "+tch_name;
+        return name +" "+tch_name+" "+college_name;
     }
 }

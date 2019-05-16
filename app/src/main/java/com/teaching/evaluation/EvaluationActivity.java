@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.teaching.evaluation.adapter.EvaAdapter;
 import com.teaching.evaluation.bean.Course;
 import com.teaching.evaluation.bean.Evaluation;
+import com.teaching.evaluation.bean.User;
 import com.teaching.evaluation.manager.DBManager;
 import com.teaching.evaluation.manager.LoginManager;
 import com.teaching.evaluation.view.BaseActivity;
@@ -34,6 +36,7 @@ public class EvaluationActivity extends BaseActivity {
 
     String mCourseName;
     String mTchName;
+    String mCollegeName;
 
     ListView mEvaListView;
 
@@ -48,6 +51,7 @@ public class EvaluationActivity extends BaseActivity {
 
         mCourseName = getIntent().getStringExtra("course_name");
         mTchName = getIntent().getStringExtra("tch_name");
+        mCollegeName = getIntent().getStringExtra("college_name");
 
         initView();
         initData();
@@ -59,8 +63,19 @@ public class EvaluationActivity extends BaseActivity {
         mEvaEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mEditEvaDialog.setParams(mCourseName,mTchName);
-                mEditEvaDialog.show();
+                User user = LoginManager.getInstance(getBaseContext()).getUser();
+                if (!user.getCollege_name().equals(mCollegeName)){
+                    Toast.makeText(getBaseContext(),"不在该院校，无法评价！",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                boolean isAviable = DBManager.getInstance(getBaseContext()).isEvaAviable(mCourseName,mTchName);
+                if (isAviable){
+                    mEditEvaDialog.setParams(mCourseName,mTchName);
+                    mEditEvaDialog.show();
+                }else{
+                    Toast.makeText(getBaseContext(),"已经评论过了！",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -120,7 +135,11 @@ public class EvaluationActivity extends BaseActivity {
         }
         if (allScore!=0.0f)
         {
-            mEvaScore.setText(allScore/evaluations.size()+"");
+            double sroce = allScore/evaluations.size();
+            java.text.DecimalFormat myformat=new java.text.DecimalFormat("0.0");
+            String str = myformat.format(sroce);
+
+            mEvaScore.setText(str);
         }
         mEvaRating.setParams(evaluations.size(),mEvaScores);
 

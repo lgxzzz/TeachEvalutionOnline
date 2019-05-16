@@ -136,6 +136,7 @@ public class DBManager {
             String place = cursor.getString(cursor.getColumnIndex("place"));
             String tch_number = cursor.getString(cursor.getColumnIndex("tch_name"));
             String time = cursor.getString(cursor.getColumnIndex("course_time"));
+            String college_name = cursor.getString(cursor.getColumnIndex("college_name"));
             Course course = new Course();
             course.setName(course_name);
             course.setHour(course_hour);
@@ -144,6 +145,7 @@ public class DBManager {
             course.setTch_name(tch_number);
             course.setCredit(course_credit);
             course.setTime(time);
+            course.setCollege_name(college_name);
             courses.add(course);
         }
         db.close();
@@ -298,7 +300,9 @@ public class DBManager {
         String college_name = cursor1.getString(cursor1.getColumnIndex("college_name"));
         String age = cursor1.getString(cursor1.getColumnIndex("age"));
         String sex = cursor1.getString(cursor1.getColumnIndex("sex"));
-
+        user.setAge(age);
+        user.setSex(sex);
+        user.setCollege_name(college_name);
         //插入用户表中
         ContentValues contentValues = new ContentValues();
         contentValues.put("user_name",user.getName());
@@ -387,6 +391,19 @@ public class DBManager {
         }
         return courses;
     };
+
+    public boolean isEvaAviable(String course_name,String tch_name){
+        User user = LoginManager.getInstance(mContext).getUser();
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        //查询是否已经评价过
+        Cursor cursor = db.rawQuery(
+                "SELECT * FROM evaluate WHERE course_name =? and tch_name =? and user_number =?",
+                new String[]{course_name,tch_name,user.getNumber()});
+        while (cursor.moveToNext()){
+            return false;
+        }
+        return true;
+    }
 
     public interface DBManagerListener{
         public void onSuccess(User user);

@@ -126,6 +126,7 @@ public class TreeListDialog extends Dialog {
                     Intent mIntent = new Intent();
                     mIntent.putExtra("course_name",course.getName());
                     mIntent.putExtra("tch_name",course.getTch_name());
+                    mIntent.putExtra("college_name",course.getCollege_name());
                     mIntent.setClassName("com.teaching.evaluation","com.teaching.evaluation.EvaluationActivity");
                     TreeListDialog.this.context.startActivity(mIntent);
                 }

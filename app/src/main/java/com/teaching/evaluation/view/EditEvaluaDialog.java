@@ -51,6 +51,7 @@ public class EditEvaluaDialog extends Dialog {
     private String mTchName;
     private String mCourseName;
     private String mEvaScore;
+    private String mCollegeName;
 
     public EditEvaluaDialog(Context context, int layoutid, boolean isCancelable, boolean isBackCancelable) {
         super(context, R.style.MyDialog);

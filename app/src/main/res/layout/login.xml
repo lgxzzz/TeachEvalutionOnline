@@ -52,6 +52,7 @@
              android:layout_gravity="center"
              android:gravity="center"
              android:id="@+id/pwd"
+             android:inputType="textPassword"
              />
     </LinearLayout>
 
